@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:23:32 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/12 20:55:07 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/03/12 21:09:10 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,32 @@ class Fixed
 
 		float	toFloat( void ) const;
 		int		toInt( void ) const;
+
+		// Comparison operators
+		bool	operator>(Fixed const & rhs) const;
+		bool	operator<(Fixed const & rhs) const;
+		bool	operator>=(Fixed const & rhs) const;
+		bool	operator<=(Fixed const & rhs) const;
+		bool	operator==(Fixed const & rhs) const;
+		bool	operator!=(Fixed const & rhs) const;
+		
+		// Arithmetic operators
+		Fixed	operator+(Fixed const & rhs) const;
+		Fixed	operator-(Fixed const & rhs) const;
+		Fixed	operator*(Fixed const & rhs) const;
+		Fixed	operator/(Fixed const & rhs) const;
+		
+		// Increment and decrement operators
+		Fixed &	operator++(void);
+		Fixed	operator++(int);
+		Fixed &	operator--(void);
+		Fixed	operator--(int);
+
+		// Min and Max functions
+		static Fixed &	min(Fixed & a, Fixed & b);
+		static Fixed &	max(Fixed & a, Fixed & b);
+		static Fixed const &	min(Fixed const & a, Fixed const & b);
+		static Fixed const &	max(Fixed const & a, Fixed const & b);
 };
 
 std::ostream & operator<<(std::ostream & o, Fixed const & rhs);
