@@ -6,13 +6,11 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 10:06:38 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/12 12:43:40 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/03/13 18:56:22 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-#include <iostream>
-#include <limits>
 
 int	main(void) {
 	PhoneBook	phoneBook;

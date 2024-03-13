@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 10:59:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/12 12:41:14 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/03/13 19:15:16 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	Contact::setIndex(int index)
 std::string	Contact::_truncate(std::string str) const
 {
 	if (str.length() > 10)
-		str.substr(0, 9) + ".";
+		return (str.substr(0, 9) + ".");
 	return (str);
 }
 
@@ -69,9 +69,9 @@ void	Contact::display(void) const
 	std::cout << "|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|" << std::endl;
 	std::cout << "|                CONTACT #" << this->_index << "                 |" << std::endl;
 	std::cout << "|___________________________________________|" << std::endl;
-	std::cout << "First name\t" << this->_firstName << std::endl;
-	std::cout << "Last name\t" << this->_lastName << std::endl;
-	std::cout << "Nick name\t" << this->_nickName << std::endl;
+	std::cout << "First name:\t" << this->_firstName << std::endl;
+	std::cout << "Last name:\t" << this->_lastName << std::endl;
+	std::cout << "Nick name:\t" << this->_nickName << std::endl;
 	std::cout << std::endl;
 }
 

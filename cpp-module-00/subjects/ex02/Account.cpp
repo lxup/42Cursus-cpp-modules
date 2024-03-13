@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:30:03 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/12 18:14:14 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/03/13 19:26:05 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,5 +139,3 @@ void	Account::displayStatus( void ) const
 				<< "deposits:" << Account::_nbDeposits << ";"
 				<< "withdrawals:" << Account::_nbWithdrawals << std::endl;
 }
-
-
