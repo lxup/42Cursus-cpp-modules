@@ -5,30 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 19:16:55 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/22 20:04:19 by lquehec          ###   ########.fr       */
+/*   Created: 2024/03/22 20:03:16 by lquehec           #+#    #+#             */
+/*   Updated: 2024/03/22 20:47:09 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "Harl.hpp"
 
 int main(void)
 {
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return (0);
+	Harl        harl;
+    std::string input;
+
+    do
+    {
+        std::cout << "Harl: ";
+        std::getline(std::cin, input);
+        if (input.compare("EXIT"))
+            harl.complain(input);
+    } while (input.compare("EXIT"));
+    return (EXIT_SUCCESS);	
 }

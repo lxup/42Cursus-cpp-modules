@@ -6,29 +6,23 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:16:55 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/22 20:04:19 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/03/22 19:27:13 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "Sed.hpp"
 
-int main(void)
+int main(int ac, char **av)
 {
+	if (ac != 4)
 	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
+        std::cerr << "Make something like: ./Sed <filename> <to_find> <replace>." << std::endl;
+        return (EXIT_FAILURE);
+    }
+	else
 	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return (0);
+        Sed   sed(av[1]);
+        sed.replace(av[2], av[3]);
+    }
+    return (EXIT_SUCCESS);	
 }

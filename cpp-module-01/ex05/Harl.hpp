@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 19:16:55 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/22 20:04:19 by lquehec          ###   ########.fr       */
+/*   Created: 2024/03/22 20:03:39 by lquehec           #+#    #+#             */
+/*   Updated: 2024/03/22 20:09:44 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#ifndef HARL_HPP
+# define HARL_HPP
 
-int main(void)
+# define EXIT_SUCCESS 0
+# define EXIT_FAILURE 1
+
+# include <iostream>
+
+class Harl
 {
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return (0);
-}
+	private:
+		void	_debug( void );
+		void	_info( void );
+		void	_warning( void );
+		void	_error( void );
+	public:
+		Harl( void );
+		~Harl( void );
+
+		void	complain( std::string level );
+};
+
+typedef void (Harl::*HarlFct)( void );
+
+#endif // HARL_HPP

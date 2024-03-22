@@ -5,30 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 19:16:55 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/22 20:04:19 by lquehec          ###   ########.fr       */
+/*   Created: 2024/03/12 20:23:20 by lquehec           #+#    #+#             */
+/*   Updated: 2024/03/22 18:59:56 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "Point.hpp"
 
-int main(void)
-{
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return (0);
+int main( void ) {
+	if (bsp(Point(0, 0), Point(10, 30), Point(20, 0), Point(10, 15))) {
+        std::cout << "Point is in the triangle" << std::endl;
+    } else {
+        std::cout << "Point is not in the triangle" << std::endl;
+    }
+	return 0;
 }

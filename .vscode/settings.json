@@ -75,6 +75,7 @@
 		"utility": "cpp",
 		"numbers": "cpp",
 		"ranges": "cpp",
-		"span": "cpp"
+		"span": "cpp",
+		"fstream": "cpp"
 	}
 }

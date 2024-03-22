@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Sed.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 19:16:55 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/22 20:04:19 by lquehec          ###   ########.fr       */
+/*   Created: 2024/03/22 19:14:38 by lquehec           #+#    #+#             */
+/*   Updated: 2024/03/22 19:53:47 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#ifndef SED_HPP
+# define SED_HPP
 
-int main(void)
+# define EXIT_SUCCESS 0
+# define EXIT_FAILURE 1
+
+# include <iostream>
+# include <fstream>
+# include <cstdlib>
+
+class Sed
 {
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return (0);
-}
+	private:
+		std::string		_filename;
+		std::ifstream	_in;
+	public:
+		Sed( std::string filename );
+		~Sed( void );
+
+		void	replace( std::string s1, std::string s2 );
+};
+
+#endif // SED_HPP

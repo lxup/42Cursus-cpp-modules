@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 10:56:26 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/13 18:54:31 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/03/15 16:49:45 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	PhoneBook::addContact(void)
 {
 	static int index;
 
+	if (index == this->_maxContact)
+		index = 0;
 	this->_contacts[index % this->_maxContact].create();
 	this->_contacts[index % this->_maxContact].setIndex(index);
 	index++;
