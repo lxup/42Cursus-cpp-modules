@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 20:23:20 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/23 10:40:19 by lquehec          ###   ########.fr       */
+/*   Created: 2024/03/23 11:44:58 by lquehec           #+#    #+#             */
+/*   Updated: 2024/03/23 12:02:28 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Point.hpp"
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
-int main( void ) {
-	if (bsp(Point(0, 0), Point(50, 100), Point(100, 0), Point(80, 50))) {
-        std::cout << "Point is in the triangle" << std::endl;
-    } else {
-        std::cout << "Point is not in the triangle" << std::endl;
-    }
-	return (0);
-}
+# include "ClapTrap.hpp"
+
+class FragTrap : virtual public ClapTrap
+{
+	public:
+		FragTrap( void );
+		FragTrap( std::string name );
+		FragTrap( FragTrap const & src );
+		~FragTrap( void );
+		
+		FragTrap & operator=( FragTrap const & rhs );
+
+		void	highFivesGuys( void );
+};
+
+#endif // FRAGTRAP_HPP
