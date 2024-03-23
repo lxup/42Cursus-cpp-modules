@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:23:20 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/23 11:48:15 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/03/23 12:19:05 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ int main( void ) {
 	machin.attack(jean.getName()); // 1st attack
 	jean.takeDamage(machin.getAttackDamage()); // Jean has taken 30 points of damage
 	machin.highFivesGuys(); // Machin has requested a high five
+	return (0);
 }

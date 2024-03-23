@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:23:20 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/23 12:07:13 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/03/23 12:18:59 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ int main( void ) {
 	diamond.guardGate(); // Diamond has entered in Gate keeper mode
 	diamond.guardGate(); // Diamond has exited Gate keeper mode
 	diamond.beRepaired(10); // Diamond has been repaired by 10 points
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:23:20 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/23 11:18:32 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/03/23 12:19:16 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ int main( void ) {
 	titouan.attack("Jean"); // already dead
 	titouanclone.attack("Jean"); // 1st attack
 	titouan.beRepaired(10); // already dead
+	return (0);
 }
