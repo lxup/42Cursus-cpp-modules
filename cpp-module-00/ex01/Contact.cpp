@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 10:59:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/13 19:15:16 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/04/23 16:37:39 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ std::string Contact::_getInput(std::string str) const
 		std::getline(std::cin, input);
 		if (!input.empty() && std::cin.good())
 			isValid = true;
+		else if (std::cin.eof()) {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << std::endl << "\1\033[1;31m\2Cancel adding contact...\1\033[0m\2" << std::endl;
+			break;
+		}
 		else
 		{
 			std::cin.clear();

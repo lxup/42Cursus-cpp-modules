@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 10:29:22 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/12 12:35:36 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/04/23 16:37:54 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <iomanip>
+# include <limits>
 
 class Contact {
 	private:
