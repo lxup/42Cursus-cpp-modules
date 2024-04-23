@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:27:19 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/12 19:02:49 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/04/23 16:51:04 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 Zombie::Zombie( void )
 {
+	// std::cout << "Zombie has been created." << std::endl;
+	return ;
 }
 
 Zombie::~Zombie( void )

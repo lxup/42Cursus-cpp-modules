@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:27:19 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/12 18:51:39 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/04/23 16:49:49 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 Zombie::Zombie(std::string name)
 {
 	this->_name = name;
+	std::cout << "Zombie " << this->_name << " has been created." << std::endl;
 	return ;
 }
 
