@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 18:47:19 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/22 18:49:39 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:05:23 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ class Point
 		Point( void );
 		Point( Point const & src );
 		Point( Fixed const x, Fixed const y );
+		// Point( float const x, float const y );
 		~Point( void );
 
 		Point & operator=( Point const & rhs );

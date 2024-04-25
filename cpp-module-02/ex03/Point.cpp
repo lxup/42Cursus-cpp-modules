@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 18:49:51 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/22 19:13:12 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:05:08 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ Point::Point( Fixed const x, Fixed const y ): _x(x), _y(y)
 	// std::cout << "Point created with x: " << x << " and y: " << y << std::endl;
 	return ;
 }
+
+// Point::Point( float const x, float const y ): _x(x), _y(y)
+// {
+// 	// std::cout << "Point created with x: " << x << " and y: " << y << std::endl;
+// 	return ;
+// }
 
 Point::Point( Point const & src ): _x(src.getX()), _y(src.getY())
 {
