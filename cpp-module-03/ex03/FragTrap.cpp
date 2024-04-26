@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 11:45:28 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/23 11:46:40 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/04/26 19:11:24 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ FragTrap::FragTrap( void )
 	this->_hitPoints = 100;
 	this->_energyPoints = 100;
 	this->_attackDamage = 30;
+	this->_baseHitPoints = this->_hitPoints;
+	this->_baseAttackDamage = this->_attackDamage;
 }
 
 FragTrap::FragTrap( std::string name )

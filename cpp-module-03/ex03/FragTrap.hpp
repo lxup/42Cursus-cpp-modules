@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 11:44:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/23 12:02:28 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/04/26 19:11:03 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 
 class FragTrap : virtual public ClapTrap
 {
+	protected:
+		unsigned int	_baseHitPoints;
+		unsigned int	_baseAttackDamage;
 	public:
 		FragTrap( void );
 		FragTrap( std::string name );

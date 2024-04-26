@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:23:20 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/23 12:18:59 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/04/26 19:15:36 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int main( void ) {
 	ScavTrap	jean("Jean");
 	FragTrap	machin("Machin");
 	DiamondTrap	diamond("Diamond");
+
+	std::cout <<"Energy Point Check:" << diamond.getEnergyPoints() << std::endl;
+	std::cout <<"Hit Point Check:" << diamond.getHitPoints() << std::endl << std::endl;
 
 	titouan.attack(jean.getName()); // 1st attack
 	jean.takeDamage(titouan.getAttackDamage()); // Jean has taken 20 points of damage
