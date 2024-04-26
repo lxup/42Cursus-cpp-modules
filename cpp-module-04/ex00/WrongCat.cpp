@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 12:27:22 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/23 12:27:46 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/04/26 19:19:48 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ WrongCat &WrongCat::operator=(WrongCat const &rhs)
 
 void	WrongCat::makeSound(void) const
 {
-	std::cout << "WrongCat sound" << std::endl;
+	std::cout << "wwwWWWOOAOFFfffff wait wtf im a cat..." << std::endl;
 }

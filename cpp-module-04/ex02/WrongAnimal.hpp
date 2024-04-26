@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/23 12:23:28 by lquehec           #+#    #+#             */
-/*   Updated: 2024/04/26 19:37:55 by lquehec          ###   ########.fr       */
+/*   Created: 2024/03/23 12:25:09 by lquehec           #+#    #+#             */
+/*   Updated: 2024/03/23 12:25:29 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#ifndef WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
-# include "Animal.hpp"
-# include "Brain.hpp"
+# include <iostream>
 
-class Dog : public Animal
+class WrongAnimal
 {
-	private:
-		Brain *_brain;
+	protected:
+		std::string	_type;
 	public:
-		Dog(void);
-		Dog(Dog const &src);
-		virtual ~Dog(void);
+		WrongAnimal(void);
+		WrongAnimal(std::string type);
+		WrongAnimal(WrongAnimal const &src);
+		virtual ~WrongAnimal(void);
 
-		Dog & operator=(Dog const &rhs);
+		WrongAnimal & operator=(WrongAnimal const &rhs);
 
-		virtual void makeSound(void) const;
-		Brain	*getBrain(void) const;
+		std::string getType(void) const;
+		void makeSound(void) const;
 };
 
-#endif // DOG_HPP
+#endif // WRONGANIMAL_HPP

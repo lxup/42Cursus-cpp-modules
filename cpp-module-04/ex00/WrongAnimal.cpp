@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 12:25:49 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/23 12:26:50 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/04/26 19:20:42 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ std::string	WrongAnimal::getType(void) const
 
 void	WrongAnimal::makeSound(void) const
 {
-	std::cout << "WrongAnimal sound" << std::endl;
+	std::cout << "Jte jure jsuis un animal frr" << std::endl;
 }

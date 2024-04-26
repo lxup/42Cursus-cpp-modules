@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 12:24:40 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/23 12:28:11 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/04/26 19:18:56 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ Cat &Cat::operator=(Cat const &rhs)
 
 void	Cat::makeSound(void) const
 {
-	std::cout << "Cat sound" << std::endl;
+	std::cout << "MIAAAAAAaaaaaoooooOOOOUUUUUUUUuuuuUUUuUuUUuuu ........." << std::endl;
 }

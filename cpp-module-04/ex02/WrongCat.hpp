@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/23 12:23:28 by lquehec           #+#    #+#             */
-/*   Updated: 2024/04/26 19:37:55 by lquehec          ###   ########.fr       */
+/*   Created: 2024/03/23 12:27:04 by lquehec           #+#    #+#             */
+/*   Updated: 2024/03/23 12:27:14 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
-# include "Animal.hpp"
-# include "Brain.hpp"
+# include "WrongAnimal.hpp"
 
-class Dog : public Animal
+class WrongCat : public WrongAnimal
 {
-	private:
-		Brain *_brain;
 	public:
-		Dog(void);
-		Dog(Dog const &src);
-		virtual ~Dog(void);
+		WrongCat(void);
+		WrongCat(WrongCat const &src);
+		virtual ~WrongCat(void);
 
-		Dog & operator=(Dog const &rhs);
+		WrongCat & operator=(WrongCat const &rhs);
 
-		virtual void makeSound(void) const;
-		Brain	*getBrain(void) const;
+		void makeSound(void) const;
 };
 
-#endif // DOG_HPP
+#endif // WRONGCAT_HPP

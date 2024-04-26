@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 12:23:54 by lquehec           #+#    #+#             */
-/*   Updated: 2024/03/23 12:28:01 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/04/26 19:19:17 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ Dog &Dog::operator=(Dog const &rhs)
 
 void	Dog::makeSound(void) const
 {
-	std::cout << "Dog sound" << std::endl;
+	std::cout << "wwwWWWOOOOOAAAAaaaaaaffFFFFFF zbiiiiiiiii......" << std::endl;
 }
