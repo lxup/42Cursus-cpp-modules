@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:36:13 by lquehec           #+#    #+#             */
-/*   Updated: 2024/04/30 18:21:14 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/04/30 20:50:43 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	customTest(void)
 	zbi->unequip(57527057); // This one should not work
 	delete src;
 	delete zbi;
+	delete tmp;
 	return (0);
 }
 
