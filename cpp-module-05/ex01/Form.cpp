@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:17:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/05/31 20:34:40 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/10 18:55:41 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@ Form::Form(const std::string & name, int gradeToSign) : _name(name), _gradeToSig
 	if (gradeToSign < 1)
 		throw Form::GradeTooHighException();
 	else if (gradeToSign > 150)
+		throw Form::GradeTooLowException();
+}
+
+Form::Form(const std::string & name, int gradeToSign, int gradeToExec) : _name(name), _gradeToSign(gradeToSign), _gradeToExec(gradeToExec)
+{
+	if (gradeToSign < 1 || gradeToExec < 1)
+		throw Form::GradeTooHighException();
+	else if (gradeToSign > 150 || gradeToExec > 150)
 		throw Form::GradeTooLowException();
 }
 
