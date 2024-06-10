@@ -6,13 +6,13 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:17:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/10 18:55:14 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/10 20:43:50 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
 
-AForm::AForm(const std::string & name, int gradeToSign) : _name(name), _gradeToSign(gradeToSign), _gradeToExec(0)
+AForm::AForm(const std::string & name, int gradeToSign) : _name(name), _signed(false), _gradeToSign(gradeToSign), _gradeToExec(0)
 {
 	if (gradeToSign < 1)
 		throw AForm::GradeTooHighException();
@@ -20,7 +20,7 @@ AForm::AForm(const std::string & name, int gradeToSign) : _name(name), _gradeToS
 		throw AForm::GradeTooLowException();
 }
 
-AForm::AForm(const std::string & name, int gradeToSign, int gradeToExec) : _name(name), _gradeToSign(gradeToSign), _gradeToExec(gradeToExec)
+AForm::AForm(const std::string & name, int gradeToSign, int gradeToExec) : _name(name), _signed(false), _gradeToSign(gradeToSign), _gradeToExec(gradeToExec)
 {
 	if (gradeToSign < 1 || gradeToExec < 1)
 		throw AForm::GradeTooHighException();

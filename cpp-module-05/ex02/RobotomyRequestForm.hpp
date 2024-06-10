@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:17:53 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/10 18:31:25 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/10 19:45:27 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class RobotomyRequestForm : public AForm
 	public:
 		RobotomyRequestForm(std::string const & target);
 		RobotomyRequestForm(RobotomyRequestForm const & copy);
-		~RobotomyRequestForm(void);
+		virtual ~RobotomyRequestForm(void);
 
 		RobotomyRequestForm & operator=(RobotomyRequestForm const & rhs);
 };

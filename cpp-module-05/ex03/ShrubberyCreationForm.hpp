@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:10:12 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/10 18:31:23 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/10 19:44:04 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class ShrubberyCreationForm : public AForm
 	public:
 		ShrubberyCreationForm(std::string const & target);
 		ShrubberyCreationForm(ShrubberyCreationForm const & copy);
-		~ShrubberyCreationForm(void);
+		virtual ~ShrubberyCreationForm(void);
 
 		ShrubberyCreationForm & operator=(ShrubberyCreationForm const & rhs);
 };

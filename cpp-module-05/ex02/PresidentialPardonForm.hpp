@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:06:30 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/10 18:31:27 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/10 19:45:24 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class PresidentialPardonForm : public AForm
 	public:
 		PresidentialPardonForm(std::string const & target);
 		PresidentialPardonForm(PresidentialPardonForm const & copy);
-		~PresidentialPardonForm(void);
+		virtual ~PresidentialPardonForm(void);
 
 		PresidentialPardonForm & operator=(PresidentialPardonForm const & rhs);
 };

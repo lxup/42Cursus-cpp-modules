@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:59:09 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/10 18:05:22 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/10 19:44:42 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class AForm
 		AForm(const std::string & name, int gradeToSign);
 		AForm(const std::string & name, int gradeToSign, int gradeToExec);
 		AForm(const AForm & copy);
-		~AForm(void);
+		virtual ~AForm(void);
 
 		AForm & operator=(const AForm & rhs);
 
