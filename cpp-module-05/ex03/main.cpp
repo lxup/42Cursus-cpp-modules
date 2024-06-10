@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:30:48 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/10 19:13:37 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/10 19:36:09 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 int	main(void)
 {
@@ -36,5 +37,10 @@ int	main(void)
 	bureaucrat.executeForm(f2);
 	bureaucrat.signForm(f2);
 	bureaucrat.executeForm(f2);
+
+	AForm *f5;
+	f5 = Intern().makeForm("ShrubberyCreationForm", "TIF");
+	f5 = Intern().makeForm("robotomy request", "TH");
+	
 	return 0;
 }
