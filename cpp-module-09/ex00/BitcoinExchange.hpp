@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/17 12:38:06 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/17 17:53:38 by lquehec          ###   ########.fr       */
+/*   Created: 2024/06/17 18:00:13 by lquehec           #+#    #+#             */
+/*   Updated: 2024/06/17 18:00:21 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERIALIZER_HPP
-# define SERIALIZER_HPP
+#ifndef BITCOINEXCHANGE_HPP
+# define BITCOINEXCHANGE_HPP
 
 # include <iostream>
-# include <stdint.h>
 
-# include "Data.hpp"
-
-class Serializer
+class BitcoinExchange
 {
 	private:
-		Serializer(void);
-		Serializer(Serializer const &src);
-		~Serializer(void);
+		BitcoinExchange(void);
+		BitcoinExchange(BitcoinExchange const &src);
+		~BitcoinExchange(void);
 
-		Serializer &operator=(Serializer const &src);
+		BitcoinExchange &operator=(BitcoinExchange const &src);
 
 	public:
-		static uintptr_t	serialize(Data *ptr);
-		static Data			*deserialize(uintptr_t raw);
-
+		static void	convert(int amount);
 };
 
-#endif // SERIALIZER_HPP
+#endif // BITCOINEXCHANGE_HPP

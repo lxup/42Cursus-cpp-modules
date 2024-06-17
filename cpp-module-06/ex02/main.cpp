@@ -6,10 +6,11 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:43:29 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/17 13:08:37 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/17 17:55:02 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cstdlib>
 #include <iostream>
 #include <ctime>
 #include "Base.hpp"

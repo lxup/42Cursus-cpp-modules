@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:03:44 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/17 12:17:34 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/17 17:51:13 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 # include <string>
 # include <limits.h>
 # include <cfloat>
+
+# define CHAR_MIN_STR "-128"
+# define CHAR_MAX_STR "127"
+# define INT_MIN_STR "-2147483648"
+# define INT_MAX_STR "2147483647"
 
 enum e_type
 {

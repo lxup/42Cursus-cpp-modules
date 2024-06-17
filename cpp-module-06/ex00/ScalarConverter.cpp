@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:04:15 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/17 12:27:36 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/17 17:51:24 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,8 +194,8 @@ void	ScalarConverter::_printChar(std::string &input)
 		std::cout << "char: impossible" << std::endl;
 		return ;
 	}
-	if (c < CHAR_MIN || (input.compare(std::to_string(CHAR_MIN)) && c == CHAR_MIN)
-		|| c > CHAR_MAX || (input.compare(std::to_string(CHAR_MAX)) && c == CHAR_MAX))
+	if (c < CHAR_MIN || (input.compare(CHAR_MIN_STR) && c == CHAR_MIN)
+		|| c > CHAR_MAX || (input.compare(CHAR_MAX_STR) && c == CHAR_MAX))
 		std::cout << "char: impossible" << std::endl;
 	else if (!std::isprint(static_cast<int>(c)))
 		std::cout << "char: Non displayable" << std::endl;
@@ -215,8 +215,8 @@ void	ScalarConverter::_printInt(std::string &input)
 		std::cout << "int: impossible" << std::endl;
 		return ;
 	}
-	if (i < INT_MIN || (input.compare(std::to_string(INT_MIN)) && i == INT_MIN)
-		|| i > INT_MAX || (input.compare(std::to_string(INT_MAX)) && i == INT_MAX))
+	if (i < INT_MIN || (input.compare(INT_MIN_STR) && i == INT_MIN)
+		|| i > INT_MAX || (input.compare(INT_MAX_STR) && i == INT_MAX))
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << i << std::endl;

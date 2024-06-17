@@ -6,13 +6,14 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:43:29 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/17 15:50:57 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/17 17:56:05 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Array.hpp"
 #include <iostream>
 #include <ctime>
+#include <cstdlib>
 
 int	main(void)
 {
