@@ -77,6 +77,8 @@
 		"ranges": "cpp",
 		"span": "cpp",
 		"fstream": "cpp",
-		"execution": "cpp"
+		"execution": "cpp",
+		"stack": "cpp",
+		"list": "cpp"
 	}
 }
