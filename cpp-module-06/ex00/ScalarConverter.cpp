@@ -6,24 +6,16 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:04:15 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/13 19:09:53 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/17 12:27:36 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-ScalarConverter::ScalarConverter(void) : _c('\0'), _i(0), _f(0.0f), _d(0.0)
-{
-}
+ScalarConverter::ScalarConverter(void) {}
 
-ScalarConverter::ScalarConverter(const char *input) : _c('\0'), _i(0), _f(0.0f), _d(0.0)
-{
-	this->_convert(input);
-}
-
-ScalarConverter::ScalarConverter(const std::string &input) : _c('\0'), _i(0), _f(0.0f), _d(0.0)
-{
-	this->_convert(input.c_str());
+ScalarConverter::ScalarConverter(const std::string &input) {
+	(void)input;
 }
 
 ScalarConverter::ScalarConverter(ScalarConverter const &src)
@@ -35,227 +27,287 @@ ScalarConverter::~ScalarConverter(void) {}
 
 ScalarConverter &ScalarConverter::operator=(ScalarConverter const &src)
 {
-	if (this != &src)
-	{
-		this->_c = src.getChar();
-		this->_i = src.getInt();
-		this->_f = src.getFloat();
-		this->_d = src.getDouble();
-	}
+	(void)src;
 	return (*this);
 }
 
-std::string ScalarConverter::getInput(void) const
+ e_type    ScalarConverter::_getType(std::string &input)
 {
-	return (this->_input);
-}
-
-e_type ScalarConverter::getInputType(void) const
-{
-	return (this->_inputType);
-}
-
-char ScalarConverter::getChar(void) const
-{
-	return (this->_c);
-}
-
-int ScalarConverter::getInt(void) const
-{
-	return (this->_i);
-}
-
-float ScalarConverter::getFloat(void) const
-{
-	return (this->_f);
-}
-
-double ScalarConverter::getDouble(void) const
-{
-	return (this->_d);
-}
-
-void ScalarConverter::setInput(const char *input)
-{
-	this->_input = input;
-}
-
-void    ScalarConverter::setInputType(void) {
-    if (isChar()) {
-        this->_input = CHAR;
-    } else if (isInt()) {
-        this->_input = INT;
-    } else if (isFloat()) {
-        this->_input = FLOAT;
-    } else if (isDouble()) {
-        this->_input = DOUBLE;
-    } else if (isLiteral()) {
-        this->_input = LITERAL;
-    } else {
-        this->_input = UNKNOWN;
-    }
-}
-
-void ScalarConverter::setChar(char c)
-{
-	this->_c = c;
-}
-
-void ScalarConverter::setInt(int i)
-{
-	this->_i = i;
-}
-
-void ScalarConverter::setFloat(float f)
-{
-	this->_f = f;
-}
-
-void ScalarConverter::setDouble(double d)
-{
-	this->_d = d;
+	if (_isChar(input))
+		return CHAR;
+	if (_isInt(input))
+		return INT;
+	if (_isFloat(input))
+		return FLOAT;
+	if (_isDouble(input))
+		return DOUBLE;
+	return UNKNOWN;
 }
 
 // Convert
-void	ScalarConverter::_convert(const char *input)
+void	ScalarConverter::convert(std::string &input)
 {
-	this->setInput(input);
-	this->setInputType();
-	if (this->getInputType() == UNKNOWN)
+	e_type	type;
+	if (input.size() == 0)
 		throw ScalarConverter::InputTypeException();
-	switch (this->_inputType)
+	type = _getType(input);
+	if (type == UNKNOWN)
+		throw ScalarConverter::InputTypeException();
+	_printChar(input);
+	_printInt(input);
+	_printFloat(input);
+	_printDouble(input);
+}
+
+void	ScalarConverter::convert(std::string &input, bool debug)
+{
+	e_type	type;
+	if (input.size() == 0)
+		throw ScalarConverter::InputTypeException();
+	type = _getType(input);
+	if (debug)
 	{
-		case CHAR:
-			this->_c = this->_input[0];
-			this->_i = static_cast<int>(this->_c);
-			this->_f = static_cast<float>(this->_c);
-			this->_d = static_cast<double>(this->_c);
-			break;
-		case INT:
-			this->_i = std::stoi(this->_input);	
-			this->_c = static_cast<char>(this->_i);
-			this->_f = static_cast<float>(this->_i);
-			this->_d = static_cast<double>(this->_i);
-			break;
-		case FLOAT:
-			this->_f = std::stof(this->_input);
-			this->_c = static_cast<char>(this->_f);
-			this->_i = static_cast<int>(this->_f);
-			this->_d = static_cast<double>(this->_f);
-			break;
-		case DOUBLE:
-			this->_d = std::stod(this->_input);
-			this->_c = static_cast<char>(this->_d);
-			this->_i = static_cast<int>(this->_d);
-			this->_f = static_cast<float>(this->_d);
-			break;
-		default:
-			break;
+		std::cout << "Input: " << input << std::endl;
+		std::cout << "Type: " << _getTypeString(type) << std::endl;
 	}
+	if (type == UNKNOWN)
+		throw ScalarConverter::InputTypeException();
+	_printChar(input);
+	_printInt(input);
+	_printFloat(input);
+	_printDouble(input);
 }
 
 // Conditions
-bool	ScalarConverter::isChar(void) const
+bool	ScalarConverter::_isChar(std::string &input)
 {
-	if (this->_input.length() == 1 && std::isprint(this->_input[0]))
-		return (true);
-	return (false);
+	if (input.length() != 1)
+		return (false);
+	if (input.at(0) > std::numeric_limits<char>::max() || input.at(0) < std::numeric_limits<char>::min())
+		return (false);
+	if (std::isdigit(input.at(0)))
+		return (false);
+	return (true);
 }
 
-bool	ScalarConverter::isInt(void) const
+bool	ScalarConverter::_isInt(std::string &input)
 {
 	int	j;
 
 	j = 0;
-	if (this->_input[j] == '+' || this->_input[j] == '-')
+	if (input[j] == '+' || input[j] == '-')
 		j++;
-	for (size_t i = j; i < this->_input.length(); i++)
+	for (size_t i = j; i < input.length(); i++)
 	{
-		if (!std::isdigit(this->_input[i]))
+		if (!std::isdigit(input[i]))
 			return (false);
 	}
 	return (true);
 }
 
-bool	ScalarConverter::isFloat(void) const
+bool	ScalarConverter::_isFloat(std::string &input)
 {
 	int	j;
 	int	dot;
 
-	if ( this->_input.find( '.' ) == std::string::npos || !this->_input.find( '.' )
-		|| this->_input.back() != 'f' || this->_input.find( '.' ) == this->_input.length() - 2 )
-        return false;
+	if (!input.compare("-inff") || !input.compare("+inff") \
+		|| !input.compare("nanf"))
+		return (true);
+	if (input.at(input.length() - 1) != 'f')
+		return (false);
 	j = 0;
 	dot = 0;
-	if (this->_input[j] == '+' || this->_input[j] == '-')
+	if (input[j] == '+' || input[j] == '-')
 		j++;
-	for (size_t i = j; i < this->_input.length() - 1; i++)
+	for (size_t i = j; i < input.length() - 1; i++)
 	{
-		if ((!std::isdigit(this->_input[i]) && this->_input[i] != '.') || dot > 1)
+		if ((!std::isdigit(input[i]) && input[i] != '.') || dot > 1)
 			return (false);
-		if (this->_input[i] == '.')
+		if (input[i] == '.')
 			dot++;
 	}
 	return (true);
 }
 
-bool	ScalarConverter::isDouble(void) const
+bool	ScalarConverter::_isDouble(std::string &input)
 {
 	int	j;
 	int	dot;
 
-	if (this->_input.find( '.' ) == std::string::npos || this->_input.find( '.' ) == 0 
-        || this->_input.find( '.' ) == this->_input.length() - 1 )
-        return false;
+	if (!input.compare("-inf") || !input.compare("+inf") \
+		|| !input.compare("nan"))
+		return (true);
 	j = 0;
 	dot = 0;
-	if (this->_input[j] == '+' || this->_input[j] == '-')
+	if (input[j] == '+' || input[j] == '-')
 		j++;
-	for (size_t i = j; i < this->_input.length(); i++)
+	for (size_t i = j; i < input.length(); i++)
 	{
-		if ((!std::isdigit(this->_input[i]) && this->_input[i] != '.') || dot > 1)
+		if ((!std::isdigit(input[i]) && input[i] != '.') || dot > 1)
 			return (false);
-		if (this->_input[i] == '.')
+		if (input[i] == '.')
 			dot++;
 	}
 	return (true);
 }
 
-bool	ScalarConverter::isLiteral(void) const
+bool	ScalarConverter::_isLiteral(std::string &input)
 {
-	if (!this->_input.compare("nan") || !this->_input.compare("nanf")
-		|| !this->_input.compare("+inf") || !this->_input.compare("+inff")
-		|| !this->_input.compare("-inf") || !this->_input.compare("-inff"))
+	if (!input.compare("-inff") || !input.compare("+inff") \
+		|| !input.compare("nanf") || !input.compare("-inf") \
+		|| !input.compare("+inf") || !input.compare("nan"))
 		return (true);
 	return (false);
+}
+
+// Converters
+char	ScalarConverter::_convertChar(std::string const &input)
+{
+	return (static_cast<char>(LibraryConverter::ft_stoi(input)));
+}
+
+int	ScalarConverter::_convertInt(std::string const &input)
+{
+	return (static_cast<int>(LibraryConverter::ft_stoi(input)));
+}
+
+float	ScalarConverter::_convertFloat(std::string const &input)
+{
+	return (static_cast<float>(LibraryConverter::ft_stof(input)));
+}
+
+double	ScalarConverter::_convertDouble(std::string const &input)
+{
+	return (static_cast<double>(LibraryConverter::ft_stod(input)));
 }
 
 // Print
-void	ScalarConverter::printChar(void) const
+void	ScalarConverter::_printChar(std::string &input)
 {
-	if (this->isLiteral() || (!std::isprint(this->_i) && (this->_i >= 127)))
-		std::cout << "Impossible" << std::endl;
-	else if (!std::isprint(this->_i))
-		std::cout << "Non displayable" << std::endl;
+	char	c;
+
+	try {
+		if (_isLiteral(input))
+			throw std::exception();
+		c = _convertChar(input);
+	} catch (std::exception &e) {
+		std::cout << "char: impossible" << std::endl;
+		return ;
+	}
+	if (c < CHAR_MIN || (input.compare(std::to_string(CHAR_MIN)) && c == CHAR_MIN)
+		|| c > CHAR_MAX || (input.compare(std::to_string(CHAR_MAX)) && c == CHAR_MAX))
+		std::cout << "char: impossible" << std::endl;
+	else if (!std::isprint(static_cast<int>(c)))
+		std::cout << "char: Non displayable" << std::endl;
 	else
-		std::cout << "'" << this->getChar() << "'" << std::endl;
+		std::cout << "char: '" << c << "'" << std::endl;
 }
 
-std::ostream & operator<<(std::ostream  &o, const ScalarConverter & rhs)
+void	ScalarConverter::_printInt(std::string &input)
 {
-	o << "char: "; rhs.printChar();
-	o << std::endl;
-	o << "int: "; rhs.printInt();
-	o << std::endl;
-	o << "float: "; rhs.printFloat();
-	o << std::endl;
-	o << "double: "; rhs.printDouble();
-	o << std::endl;
-	return (o);
+	int	i;
+
+	try {
+		if (_isLiteral(input))
+			throw std::exception();
+		i = _convertInt(input);
+	} catch (std::exception &e) {
+		std::cout << "int: impossible" << std::endl;
+		return ;
+	}
+	if (i < INT_MIN || (input.compare(std::to_string(INT_MIN)) && i == INT_MIN)
+		|| i > INT_MAX || (input.compare(std::to_string(INT_MAX)) && i == INT_MAX))
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << i << std::endl;
+}
+
+void	ScalarConverter::_printFloat(std::string &input)
+{
+	float	f;
+
+	try {
+		f = _convertFloat(input.at(input.size() - 1) != 'f' ? input : input.substr(0, input.size() - 1));
+	} catch (std::exception &e) {
+		std::cout << "float: impossible" << std::endl;
+		return ;
+	}
+	if (_isLiteral(input))
+	{
+		if (!input.compare("+inf") || !input.compare("-inf"))
+			std::cout << "float: " << input << "f" << std::endl;
+		else if (input.substr(input.size() - 1).compare("f"))
+			std::cout << "float: " << input << "f" << std::endl;
+		else
+			std::cout << "float: " << input << std::endl;
+	}
+	else
+	{
+		if (f < -FLT_MAX || f > FLT_MAX)
+			std::cout << "float: impossible" << std::endl;
+		else
+		{
+			if (f == static_cast<int>(f))
+				std::cout << "float: " << f << ".0f" << std::endl;
+			else
+				std::cout << "float: " << f << "f" << std::endl;
+		}
+	}
+}
+
+void	ScalarConverter::_printDouble(std::string &input)
+{
+	double	d;
+
+	try {
+		d = _convertDouble(input.at(input.size() - 1) != 'f' ? input : input.substr(0, input.size() - 1));
+	} catch (std::exception &e) {
+		std::cout << "double: impossible" << std::endl;
+		return ;
+	}
+	if (_isLiteral(input))
+	{
+		if (!input.compare("+inf") || !input.compare("-inf"))
+			std::cout << "double: " << input << std::endl;
+		else if (input.substr(input.size() - 1).compare("f"))
+			std::cout << "double: " << input << std::endl;
+		else 
+			std::cout << "double: " << input.substr(0, input.size() - 1) << std::endl;
+	}
+	else
+	{
+		if (d < -DBL_MAX || d > DBL_MAX)
+			std::cout << "double: impossible" << std::endl;
+		else
+		{
+			if (d == static_cast<int>(d))
+				std::cout << "double: " << d << ".0" << std::endl;
+			else
+				std::cout << "double: " << d << std::endl;
+		}
+	}
+}
+
+// Utils
+std::string	ScalarConverter::_getTypeString(e_type type)
+{
+	switch (type)
+	{
+		case CHAR:
+			return "char";
+		case INT:
+			return "int";
+		case FLOAT:
+			return "float";
+		case DOUBLE:
+			return "double";
+		default:
+			return "unknown";
+	}
 }
 
 // Exceptions
 const char * ScalarConverter::InputTypeException::what() const throw()
 {
-	return ("Error: Input type is unknown");
+	return ("Input type is unknown");
 }

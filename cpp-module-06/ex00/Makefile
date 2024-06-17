@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 15:29:09 by lquehec           #+#    #+#              #
-#    Updated: 2024/06/13 18:44:33 by lquehec          ###   ########.fr        #
+#    Updated: 2024/06/17 10:41:08 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,11 +60,13 @@ OBJ_PATH		=	.obj
 
 HEADERS			=	$(addsuffix .hpp, \
 					ScalarConverter \
+					LibraryConverter \
 					)
 
 SRCS 			=	$(addsuffix .cpp, \
 					main \
 					ScalarConverter \
+					LibraryConverter \
 					)
 
 OBJS			=	$(SRCS:%.cpp=$(OBJ_PATH)/%.o)

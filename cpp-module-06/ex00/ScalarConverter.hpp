@@ -6,15 +6,19 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:03:44 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/13 18:42:25 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/17 12:17:34 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
 
-#include <iostream>
-#include <string>
+# include "LibraryConverter.hpp"
+
+# include <iostream>
+# include <string>
+# include <limits.h>
+# include <cfloat>
 
 enum e_type
 {
@@ -22,57 +26,46 @@ enum e_type
 	INT,
 	FLOAT,
 	DOUBLE,
-	LITERAL,
 	UNKNOWN
 };
 
 class ScalarConverter
 {
 	private:
-		std::string	_input;
-		e_type		_inputType;
-
-		char		_c;
-		int			_i;
-		float		_f;
-		double		_d;
-
-		void		_convert(const char *input);
-		
-	public:
 		ScalarConverter(void);
-		ScalarConverter(const char *input);
 		ScalarConverter(const std::string &input);
 		ScalarConverter(ScalarConverter const &src);
 		~ScalarConverter(void);
 
 		ScalarConverter &operator=(ScalarConverter const &src);
 
-		std::string	getInput(void) const;
-		e_type		getInputType(void) const;
-		char		getChar(void) const;
-		int			getInt(void) const;
-		float		getFloat(void) const;
-		double		getDouble(void) const;
+		static e_type		_getType(std::string &input);
 
-		void		setInput(const char *input);
-		void		setInputType(void);
-		void		setChar(char c);
-		void		setInt(int i);
-		void		setFloat(float f);
-		void		setDouble(double d);
+		// Conditions
+		static bool		_isChar(std::string &input);
+		static bool		_isInt(std::string &input);
+		static bool		_isFloat(std::string &input);
+		static bool		_isDouble(std::string &input);
+		static bool		_isLiteral(std::string &input);
 
-		bool		isChar(void) const;
-		bool		isInt(void) const;
-		bool		isFloat(void) const;
-		bool		isDouble(void) const;
-		bool		isLiteral(void) const;
+		// Converters
+		static char		_convertChar(std::string const &input);
+		static int		_convertInt(std::string const &input);
+		static float	_convertFloat(std::string const &input);
+		static double	_convertDouble(std::string const &input);
+
+		// Prints
+		static void		_printChar(std::string &input);
+		static void		_printInt(std::string &input);
+		static void		_printFloat(std::string &input);
+		static void		_printDouble(std::string &input);
+
+		// Utils
+		static std::string	_getTypeString(e_type type);
 		
-
-		void		printChar(void) const;
-		void		printInt(void) const;
-		void		printFloat(void) const;
-		void		printDouble(void) const;
+	public:
+		static void		convert(std::string &input);
+		static void		convert(std::string &input, bool debug);
 
 		class	InputTypeException : public std::exception
 		{
@@ -80,7 +73,5 @@ class ScalarConverter
 				virtual const char* what() const throw();
 		};
 };
-
-std::ostream & operator<<(std::ostream & o, const ScalarConverter & rhs);
 
 #endif // SCALARCONVERTER_HPP
