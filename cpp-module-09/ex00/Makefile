@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 15:29:09 by lquehec           #+#    #+#              #
-#    Updated: 2024/06/17 18:10:05 by lquehec          ###   ########.fr        #
+#    Updated: 2024/06/17 21:06:16 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,11 +60,13 @@ OBJ_PATH		=	.obj
 
 HEADERS			=	$(addsuffix .hpp, \
 					BitcoinExchange \
+					LibraryConverter \
 					)
 
 SRCS 			=	$(addsuffix .cpp, \
 					main \
 					BitcoinExchange \
+					LibraryConverter \
 					)
 
 OBJS			=	$(SRCS:%.cpp=$(OBJ_PATH)/%.o)

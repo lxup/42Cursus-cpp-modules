@@ -79,6 +79,7 @@
 		"fstream": "cpp",
 		"execution": "cpp",
 		"stack": "cpp",
-		"list": "cpp"
+		"list": "cpp",
+		"map": "cpp"
 	}
 }

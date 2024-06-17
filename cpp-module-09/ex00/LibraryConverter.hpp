@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   LibraryConverter.hpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/17 15:53:44 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/17 20:41:15 by lquehec          ###   ########.fr       */
+/*   Created: 2024/06/17 10:37:50 by lquehec           #+#    #+#             */
+/*   Updated: 2024/06/17 12:17:39 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "BitcoinExchange.hpp"
+#ifndef LIBRARYCONVERTER_HPP
+# define LIBRARYCONVERTER_HPP
 
-int	main(int ac, char **av)
+# include <iostream>
+# include <sstream>
+# include <limits>
+
+class LibraryConverter
 {
-	if (ac != 2)
-	{
-		std::cerr << "Usage: ./btc <file>" << std::endl;
-		return (1);
-	}
-	try
-	{
-		BitcoinExchange btc;
-		// btc.printData();
-		btc.exchange(av[1]);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << "Error: " << e.what() << std::endl;
-		return (1);
-	}
-	
-}
+	public:
+		static int		ft_stoi(const std::string &input);
+		static float	ft_stof(const std::string &input);
+		static double	ft_stod(const std::string &input);
+};
+
+#endif // LIBRARYCONVERTER_HPP
