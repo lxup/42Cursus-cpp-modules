@@ -6,29 +6,28 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:53:44 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/18 10:51:43 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/18 12:58:00 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "BitcoinExchange.hpp"
+#include "RPN.hpp"
 
 int	main(int ac, char **av)
 {
 	if (ac != 2)
 	{
-		std::cerr << "Usage: ./btc <file>" << std::endl;
+		// why not std::cerr? BECAUSE THE SUBJECT IS DUMB AF
+		std::cout << "Usage: ./RPN <expression>" << std::endl;
 		return (1);
 	}
 	try
 	{
-		BitcoinExchange btc;
-		// btc.printData();
-		btc.exchange(av[1]);
+		RPN RPN(av[1]);
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << "Error: " << e.what() << std::endl;
+		std::cout << "Error: " << e.what() << std::endl;
 		return (1);
 	}
-	
+	return (0);
 }

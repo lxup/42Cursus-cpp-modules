@@ -80,6 +80,7 @@
 		"execution": "cpp",
 		"stack": "cpp",
 		"list": "cpp",
-		"map": "cpp"
+		"map": "cpp",
+		"__tree": "cpp"
 	}
 }
