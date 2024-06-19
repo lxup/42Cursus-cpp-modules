@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:04:15 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/17 17:51:24 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/19 18:28:28 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,18 +184,20 @@ double	ScalarConverter::_convertDouble(std::string const &input)
 // Print
 void	ScalarConverter::_printChar(std::string &input)
 {
+	double	d;
 	char	c;
 
 	try {
 		if (_isLiteral(input))
 			throw std::exception();
 		c = _convertChar(input);
+		d = _convertDouble(input);
 	} catch (std::exception &e) {
 		std::cout << "char: impossible" << std::endl;
 		return ;
 	}
-	if (c < CHAR_MIN || (input.compare(CHAR_MIN_STR) && c == CHAR_MIN)
-		|| c > CHAR_MAX || (input.compare(CHAR_MAX_STR) && c == CHAR_MAX))
+	if (d < CHAR_MIN || (input.compare(CHAR_MIN_STR) && d == CHAR_MIN)
+		|| d > CHAR_MAX || (input.compare(CHAR_MAX_STR) && d == CHAR_MAX))
 		std::cout << "char: impossible" << std::endl;
 	else if (!std::isprint(static_cast<int>(c)))
 		std::cout << "char: Non displayable" << std::endl;
@@ -205,18 +207,20 @@ void	ScalarConverter::_printChar(std::string &input)
 
 void	ScalarConverter::_printInt(std::string &input)
 {
-	int	i;
+	double	d;
+	int		i;
 
 	try {
 		if (_isLiteral(input))
 			throw std::exception();
 		i = _convertInt(input);
+		d = _convertDouble(input);
 	} catch (std::exception &e) {
 		std::cout << "int: impossible" << std::endl;
 		return ;
 	}
-	if (i < INT_MIN || (input.compare(INT_MIN_STR) && i == INT_MIN)
-		|| i > INT_MAX || (input.compare(INT_MAX_STR) && i == INT_MAX))
+	if (d < INT_MIN || (input.compare(INT_MIN_STR) && d == INT_MIN)
+		|| d > INT_MAX || (input.compare(INT_MAX_STR) && d == INT_MAX))
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << i << std::endl;

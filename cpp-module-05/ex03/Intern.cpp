@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 19:22:23 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/10 19:34:30 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:30:30 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ AForm	*Intern::makeForm(std::string name, std::string const & target)
 	}
 	if (!newForm)
 		std::cout << "Form with name " << name << " not found." << std::endl;
+	else
+		std::cout << "Intern creates " << newForm->getName() << std::endl;
 	return (newForm);
 }

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:59:09 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/10 19:45:02 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:23:19 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define AFORM_HPP
 
 # include "Bureaucrat.hpp"
+
+# define HIGHEST_GRADE 1
+# define LOWEST_GRADE 150
 
 class Bureaucrat;
 

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:43:29 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/17 12:54:18 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:17:17 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(void)
 	deserialized = Serializer::deserialize(raw);
 	std::cout << "Deserialized number: " << deserialized->number << std::endl;
 	std::cout << "Deserialized valid: " << deserialized->valid << std::endl;
+	std::cout << "Change number from deserialized to 21" << std::endl;
 	deserialized->number = 21;
 	std::cout << "Data number: " << ptr->number << std::endl;
 	return (0);

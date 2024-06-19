@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:31:04 by lquehec           #+#    #+#             */
-/*   Updated: 2024/05/31 20:28:20 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:22:47 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <iostream>
 # include "Form.hpp"
+
+# define HIGHEST_GRADE 1
+# define LOWEST_GRADE 150
 
 class Form;
 

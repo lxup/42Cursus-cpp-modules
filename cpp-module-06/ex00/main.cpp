@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:30:48 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/17 12:17:00 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:56:00 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 	for (int i = 1; i < ac; i++)
 	{
 		std::string str = av[i];
-		if (i == 1 && str.substr(0, 2) == "--")
+		if (i == 1 && str.substr(0, 2) == "--" && str.size() > 2 && isalpha(str[2]))
 		{
 			if (str.compare("--debug") == 0)
 				debug = true;

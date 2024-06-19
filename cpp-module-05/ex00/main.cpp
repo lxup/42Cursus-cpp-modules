@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:30:48 by lquehec           #+#    #+#             */
-/*   Updated: 2024/05/31 18:10:34 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:41:04 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int	main(void)
 	{
 		std::cout << e.what() << std::endl;
 	}
+	delete bureaucrat2;
 	return (0);
 }

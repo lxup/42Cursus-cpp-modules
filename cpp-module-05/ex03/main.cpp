@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:30:48 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/10 19:42:36 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:43:10 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@ int	main(void)
 
 	Intern	intern = Intern();
 
+	std::cout << "Intern creates:" << std::endl;
 	AForm	*f1 = intern.makeForm("Shrubbery Creation", "TIF");
 	AForm	*f2 = intern.makeForm("Robotomy Request", "TH");
 	AForm	*f3 = intern.makeForm("Presidential Pardon", "Booba");
-	
+	std::cout << std::endl;
+
+	std::cout << std::endl << "Bureaucrat executes:" << std::endl;
 	bureaucrat.executeForm(*f1);
 	bureaucrat.signForm(*f1);
 	bureaucrat.executeForm(*f1);
@@ -38,12 +41,20 @@ int	main(void)
 	bureaucrat.executeForm(*f3);
 	bureaucrat.signForm(*f3);
 	bureaucrat.executeForm(*f3);
+	std::cout << std::endl;
 
-	intern.makeForm("Form does not exist", "Booba");
+	std::cout << "Intern creates the form that does not exist:" << std::endl;
+	AForm *f4 = intern.makeForm("Form does not exist", "Booba");
+	std::cout << std::endl;
+
+	std::cout << "Intern creates the form that do exist:" << std::endl;
+	AForm *f5 = intern.makeForm("Presidential Pardon", "Booba");
 
 	delete f1;
 	delete f2;
 	delete f3;
+	delete f4;
+	delete f5;
 	
 	return 0;
 }

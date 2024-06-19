@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:10:32 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/10 18:17:33 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:39:06 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ void	ShrubberyCreationForm::beExecuted(void) const
 	std::ofstream	file;
 	std::string		filename = this->_target + "_shrubbery";
 
-	file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+	// file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	file.open(filename.c_str(), std::ofstream::out | std::ofstream::trunc);
+	if (!file.is_open())
+		throw FileException();
 	file << "          .     .  .      +     .      .          ." << std::endl;
 	file << "     .       .      .     #       .           ." << std::endl;
 	file << "        .      .         ###            .      .      ." << std::endl;
@@ -54,4 +56,10 @@ void	ShrubberyCreationForm::beExecuted(void) const
 	file << "       .         .   .   000     .        .       ." << std::endl;
 	file << ".. .. ..................O000O........................ ...... ..." << std::endl;
 	file.close();
+}
+
+// Exceptions
+const char* ShrubberyCreationForm::FileException::what() const throw()
+{
+	return ("cannot open file");
 }

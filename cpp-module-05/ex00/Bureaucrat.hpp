@@ -6,14 +6,17 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:31:04 by lquehec           #+#    #+#             */
-/*   Updated: 2024/05/31 19:27:24 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:12:41 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
-#include <iostream>
+# include <iostream>
+
+# define HIGHEST_GRADE 1
+# define LOWEST_GRADE 150
 
 class Bureaucrat
 {
