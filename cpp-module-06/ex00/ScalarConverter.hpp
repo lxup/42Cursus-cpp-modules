@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:03:44 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/17 17:51:13 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/20 19:23:39 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ class ScalarConverter
 		
 	public:
 		static void		convert(std::string &input);
-		static void		convert(std::string &input, bool debug);
 
 		class	InputTypeException : public std::exception
 		{

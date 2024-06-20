@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:04:15 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/20 16:06:31 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/20 19:42:08 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,18 @@ void	ScalarConverter::convert(std::string &input)
 	if (input.size() == 0)
 		throw ScalarConverter::InputTypeException();
 	type = _getType(input);
+	// std::cout << "Input: " << input << std::endl;
+	// std::cout << "Type: " << _getTypeString(type) << std::endl;
 	if (type == UNKNOWN)
 		throw ScalarConverter::InputTypeException();
-	_printChar(input);
-	_printInt(input);
-	_printFloat(input);
-	_printDouble(input);
-}
-
-void	ScalarConverter::convert(std::string &input, bool debug)
-{
-	e_type	type;
-	if (input.size() == 0)
-		throw ScalarConverter::InputTypeException();
-	type = _getType(input);
-	if (debug)
+	else if (type == CHAR)
 	{
-		std::cout << "Input: " << input << std::endl;
-		std::cout << "Type: " << _getTypeString(type) << std::endl;
+		std:: cout << "char: '" << input << "'" << std::endl;
+		std:: cout << "int: " << static_cast<int>(input.at(0)) << std::endl;
+		std:: cout << "float: " << static_cast<float>(input.at(0)) << ".0f" << std::endl;
+		std:: cout << "double: " << static_cast<double>(input.at(0)) << ".0" << std::endl;
+		return ;		
 	}
-	if (type == UNKNOWN)
-		throw ScalarConverter::InputTypeException();
 	_printChar(input);
 	_printInt(input);
 	_printFloat(input);
@@ -230,12 +221,6 @@ void	ScalarConverter::_printFloat(std::string &input)
 {
 	float	f;
 
-	try {
-		f = _convertFloat(input.at(input.size() - 1) != 'f' ? input : input.substr(0, input.size() - 1));
-	} catch (std::exception &e) {
-		std::cout << "float: impossible" << std::endl;
-		return ;
-	}
 	if (_isLiteral(input))
 	{
 		if (!input.compare("+inf") || !input.compare("-inf"))
@@ -244,18 +229,22 @@ void	ScalarConverter::_printFloat(std::string &input)
 			std::cout << "float: " << input << "f" << std::endl;
 		else
 			std::cout << "float: " << input << std::endl;
+		return ;
 	}
+	try {
+		f = _convertFloat(input.at(input.size() - 1) != 'f' ? input : input.substr(0, input.size() - 1));
+	} catch (std::exception &e) {
+		std::cout << "float: impossible" << std::endl;
+		return ;
+	}
+	if (f < -FLT_MAX || f > FLT_MAX)
+		std::cout << "float: impossible" << std::endl;
 	else
 	{
-		if (f < -FLT_MAX || f > FLT_MAX)
-			std::cout << "float: impossible" << std::endl;
+		if (f == static_cast<int>(f))
+			std::cout << "float: " << f << ".0f" << std::endl;
 		else
-		{
-			if (f == static_cast<int>(f))
-				std::cout << "float: " << f << ".0f" << std::endl;
-			else
-				std::cout << "float: " << f << "f" << std::endl;
-		}
+			std::cout << "float: " << f << "f" << std::endl;
 	}
 }
 
@@ -263,12 +252,6 @@ void	ScalarConverter::_printDouble(std::string &input)
 {
 	double	d;
 
-	try {
-		d = _convertDouble(input.at(input.size() - 1) != 'f' ? input : input.substr(0, input.size() - 1));
-	} catch (std::exception &e) {
-		std::cout << "double: impossible" << std::endl;
-		return ;
-	}
 	if (_isLiteral(input))
 	{
 		if (!input.compare("+inf") || !input.compare("-inf"))
@@ -277,18 +260,22 @@ void	ScalarConverter::_printDouble(std::string &input)
 			std::cout << "double: " << input << std::endl;
 		else 
 			std::cout << "double: " << input.substr(0, input.size() - 1) << std::endl;
+		return ;
 	}
+	try {
+		d = _convertDouble(input.at(input.size() - 1) != 'f' ? input : input.substr(0, input.size() - 1));
+	} catch (std::exception &e) {
+		std::cout << "double: impossible" << std::endl;
+		return ;
+	}
+	if (d < -DBL_MAX || d > DBL_MAX)
+		std::cout << "double: impossible" << std::endl;
 	else
 	{
-		if (d < -DBL_MAX || d > DBL_MAX)
-			std::cout << "double: impossible" << std::endl;
+		if (d == static_cast<int>(d))
+			std::cout << "double: " << d << ".0" << std::endl;
 		else
-		{
-			if (d == static_cast<int>(d))
-				std::cout << "double: " << d << ".0" << std::endl;
-			else
-				std::cout << "double: " << d << std::endl;
-		}
+			std::cout << "double: " << d << std::endl;
 	}
 }
 
