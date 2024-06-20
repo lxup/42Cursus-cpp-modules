@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:43:29 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/20 16:03:49 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/20 19:48:04 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ void	identify(Base &p)
 		else
 			throw std::exception();
 	}
-	catch (std::exception &e) {}
+	catch (std::exception &e)
+	{
+		std::cerr << "Unknown class" << std::endl;
+	}
 }
 
 int	main(void)
