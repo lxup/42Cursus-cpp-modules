@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:53:44 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/19 17:30:41 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/20 11:05:24 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,9 @@
 
 int	main(int ac, char **av)
 {
-	if (ac != 2)
-	{
-		std::cerr << "Usage: ./PmergeMe <sequence>" << std::endl;
-		return (1);
-	}
 	try
 	{
-		
+		PmergeMe	pm(ac, av);
 	}
 	catch(const std::exception& e)
 	{
