@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:04:15 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/24 16:10:32 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/24 19:30:55 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ bool	ScalarConverter::_isFloat(std::string &input)
 {
 	int	j;
 	int	dot;
+	int	numbers;
 
 	if (!input.compare("-inff") || !input.compare("+inff") \
 		|| !input.compare("nanf"))
@@ -113,13 +114,18 @@ bool	ScalarConverter::_isFloat(std::string &input)
 	dot = 0;
 	if (input[j] == '+' || input[j] == '-')
 		j++;
+	numbers = 0;
 	for (size_t i = j; i < input.length() - 1; i++)
 	{
 		if ((!std::isdigit(input[i]) && input[i] != '.') || dot > 1)
 			return (false);
 		if (input[i] == '.')
 			dot++;
+		if (std::isdigit(input[i]))
+			numbers++;
 	}
+	if (!numbers || dot > 1)
+		return (false);
 	return (true);
 }
 
@@ -127,6 +133,7 @@ bool	ScalarConverter::_isDouble(std::string &input)
 {
 	int	j;
 	int	dot;
+	int	numbers;
 
 	if (!input.compare("-inf") || !input.compare("+inf") \
 		|| !input.compare("nan"))
@@ -135,13 +142,18 @@ bool	ScalarConverter::_isDouble(std::string &input)
 	dot = 0;
 	if (input[j] == '+' || input[j] == '-')
 		j++;
+	numbers = 0;
 	for (size_t i = j; i < input.length(); i++)
 	{
 		if ((!std::isdigit(input[i]) && input[i] != '.') || dot > 1)
 			return (false);
 		if (input[i] == '.')
 			dot++;
+		if (std::isdigit(input[i]))
+			numbers++;
 	}
+	if (!numbers || dot > 1)
+		return (false);
 	return (true);
 }
 
@@ -184,8 +196,8 @@ void	ScalarConverter::_printChar(std::string &input)
 	try {
 		if (_isLiteral(input))
 			throw std::exception();
-		c = _convertChar(input);
-		d = _convertDouble(input);
+		c = _convertChar(input.at(input.size() - 1) != 'f' ? input : input.substr(0, input.size() - 1));
+		d = _convertDouble(input.at(input.size() - 1) != 'f' ? input : input.substr(0, input.size() - 1));
 	} catch (std::exception &e) {
 		std::cout << "char: impossible" << std::endl;
 		return ;
@@ -207,8 +219,8 @@ void	ScalarConverter::_printInt(std::string &input)
 	try {
 		if (_isLiteral(input))
 			throw std::exception();
-		i = _convertInt(input);
-		d = _convertDouble(input);
+		i = _convertInt(input.at(input.size() - 1) != 'f' ? input : input.substr(0, input.size() - 1));
+		d = _convertDouble(input.at(input.size() - 1) != 'f' ? input : input.substr(0, input.size() - 1));
 	} catch (std::exception &e) {
 		std::cout << "int: impossible" << std::endl;
 		return ;
