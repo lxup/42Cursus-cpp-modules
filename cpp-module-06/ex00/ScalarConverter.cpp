@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:04:15 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/20 19:42:08 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/24 16:10:32 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ void	ScalarConverter::convert(std::string &input)
 		throw ScalarConverter::InputTypeException();
 	else if (type == CHAR)
 	{
-		std:: cout << "char: '" << input << "'" << std::endl;
+		if (!std::isprint(static_cast<int>(input.at(0))))
+			std::cout << "char: Non displayable" << std::endl;
+		else
+			std:: cout << "char: '" << input << "'" << std::endl;
 		std:: cout << "int: " << static_cast<int>(input.at(0)) << std::endl;
 		std:: cout << "float: " << static_cast<float>(input.at(0)) << ".0f" << std::endl;
 		std:: cout << "double: " << static_cast<double>(input.at(0)) << ".0" << std::endl;

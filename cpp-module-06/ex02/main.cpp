@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:43:29 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/20 19:48:04 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/24 16:04:53 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ void	identify(Base &p)
 	// std::cout << "Identify using reference to Base" << std::endl;
 	try
 	{
-		if (dynamic_cast<A*>(&p) != NULL)
+		if (dynamic_cast<A*>(&p))
 			std::cout << "A" << std::endl;
-		else if (dynamic_cast<B*>(&p) != NULL)
+		else if (dynamic_cast<B*>(&p))
 			std::cout << "B" << std::endl;
-		else if (dynamic_cast<C*>(&p) != NULL)
+		else if (dynamic_cast<C*>(&p))
 			std::cout << "C" << std::endl;
 		else
 			throw std::exception();
