@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:29:55 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/17 15:38:32 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/25 18:50:58 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ class Array
 			return (*this);
 		}
 
-		T		&operator[](size_t i)
+		T	&operator[](size_t i)
 		{
 			if (i >= _size)
 				throw std::exception();
