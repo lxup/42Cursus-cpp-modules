@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:22:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/17 16:26:48 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/06/26 19:13:14 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,12 @@ class MutantStack : public std::stack<T>
 		}
 
 		typedef typename std::stack<T>::container_type::iterator iterator;
+		typedef typename std::stack<T>::container_type::const_iterator const_iterator;
+		
 		iterator	begin(void) { return (std::stack<T>::c.begin()); }
+		const_iterator	begin(void) const { return (std::stack<T>::c.begin()); }
 		iterator	end(void) { return (std::stack<T>::c.end()); }
+		const_iterator	end(void) const { return (std::stack<T>::c.end()); }
 };
 
 #endif // MUTANTSTACK_HPP

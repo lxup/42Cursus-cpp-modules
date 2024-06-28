@@ -42,6 +42,16 @@
 		"unordered_map": "cpp",
 		"vector": "cpp",
 		"fstream": "cpp",
-		"numbers": "cpp"
+		"numbers": "cpp",
+		"bit": "cpp",
+		"list": "cpp",
+		"map": "cpp",
+		"iterator": "cpp",
+		"numeric": "cpp",
+		"optional": "cpp",
+		"iomanip": "cpp",
+		"ranges": "cpp",
+		"span": "cpp",
+		"sstream": "cpp"
 	}
 }
