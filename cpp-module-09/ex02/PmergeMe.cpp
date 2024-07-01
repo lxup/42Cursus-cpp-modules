@@ -6,11 +6,25 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 12:57:11 by lquehec           #+#    #+#             */
-/*   Updated: 2024/07/01 12:46:17 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/01 18:54:57 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+
+// Container type
+template <typename Container>
+std::string getContainerType();
+
+template <>
+std::string getContainerType<std::vector<int> >() {
+    return "vector<int>";
+}
+
+template <>
+std::string getContainerType<std::list<int> >() {
+    return "list<int>";
+}
 
 // Constructor (void)
 template <typename Container>
@@ -61,17 +75,128 @@ PmergeMe<Container>	&PmergeMe<Container>::operator=(PmergeMe const &src)
 template <typename Container>
 void	PmergeMe<Container>::sort(void)
 {
-	std::cout << "GO1" << std::endl;
 	if (this->_data.size() < 2)
 		return ;
-	std::cout << "GO2" << std::endl;
 	clock_t					startClock = clock();
-	// std::vector<pair_type>	pairs = generatePairs(this->_data);
-	(void)startClock;
+	std::vector<pair_type>	pairs = generatePairs(this->_data);
 	
+	// print pairs
+	// std::cout << "Pairs: ";
+	// for (size_t i = 0; i < pairs.size(); i++)
+	// {
+	// 	std::cout << "(" << pairs[i].first << ", " << pairs[i].second << ") ";
+	// }
+
+	std::vector<int>		indexes = generateIndexes(this->_data.size());
 	
+	// print indexes
+	// std::cout << "Indexes: ";
+	// for (size_t i = 0; i < indexes.size(); i++)
+	// 	std::cout << indexes[i] << " ";
+
+	// Case only one odd element
+	if (pairs.size() == 1 && pairs[0].second == -1)
+	{
+		this->_data.clear();
+		this->_data.push_back(pairs[0].first);
+	}
+	else
+	{
+		
+	}
+	// get final time
+	this->_time = static_cast<double>(clock() - startClock) / CLOCKS_PER_SEC;
 }
 
+// Sort functions
+template <typename Container>
+std::vector<typename PmergeMe<Container>::pair_type>	PmergeMe<Container>::generatePairs(Container &data)
+{
+	std::vector<pair_type>	pairs;
+	value_type				odd;
+	
+	// Protect the function
+	if (data.size() < 2)
+		return (pairs);
+	// If the size of the data is odd, we store the last element
+	if (data.size() % 2)
+	{
+		odd = data.back();
+		data.pop_back();
+	}
+	// We generate the pairs
+	for (size_t i = 0; i < this->_data.size(); i += 2)
+	{
+		std::pair<int, int> pair = std::make_pair(this->_data[i], this->_data[i + 1]);
+
+		if (pair.first > pair.second)
+			std::swap(pair.first, pair.second);
+		pairs.push_back(pair);
+	}
+	// If the size of the data was odd, we push the last element with second element being -1 (to be sure it will be the last element)
+	if (odd)
+		pairs.push_back(std::make_pair(odd, -1));
+	return (pairs);
+}
+
+// generatePairs functions variants for specific containers
+// List
+template <>
+std::vector<std::pair<int, int> >	PmergeMe<std::list<int> >::generatePairs(std::list<int> &data)
+{
+	std::vector<std::pair<int, int> >	pairs;
+	value_type							odd;
+	std::list<int>::iterator 			it = data.begin();
+	
+	// Protect the function
+	if (data.size() < 2)
+		return (pairs);
+	// If the size of the data is odd, we store the last element
+	if (data.size() % 2)
+	{
+		odd = data.back();
+		data.pop_back();
+	}
+	// We generate the pairs
+	for (size_t i = 0; i < this->_data.size(); i += 2)
+	{
+		std::advance(it, i);
+		std::pair<int, int> pair = std::make_pair(*it, *(++it));
+		if (pair.first > pair.second)
+			std::swap(pair.first, pair.second);
+		pairs.push_back(pair);
+	}
+	// If the size of the data was odd, we push the last element with second element being -1 (to be sure it will be the last element)
+	if (odd)
+		pairs.push_back(std::make_pair(odd, -1));
+	return (pairs);
+}
+
+template <typename Container>
+std::vector<int>	PmergeMe<Container>::generateIndexes(size_t size)
+{
+	// we gonna use the Jacobsthal sequence to generate the indexes
+	std::vector<int>	indexes(size);
+	std::vector<int>	jacobsthal = generateJacobsthal(size);
+	
+	// We generate the indexes
+	for (size_t i = 0; i < size; i++)
+		indexes[i] = jacobsthal[i];
+	return (indexes);
+}
+
+template <typename Container>
+std::vector<int>	PmergeMe<Container>::generateJacobsthal(size_t size)
+{
+    std::vector<int> jacobsthal(size < 2 ? 2 : size + 1);
+
+    jacobsthal[0] = 0;
+	jacobsthal[1] = 1;
+	for (size_t i = 2; i <= size; i++) {
+		jacobsthal[i] = jacobsthal[i - 1] + 2 * jacobsthal[i - 2];
+	}
+    return jacobsthal;
+}
 
 // template <>
 // std::string getContainerType<std::deque<int> >() {
@@ -273,24 +398,10 @@ std::ostream	&operator<<(std::ostream &os, PmergeMe<Container> const &src)
 	return (os);
 }
 
-// Container type
-template <typename Container>
-std::string getContainerType();
-
-template <>
-std::string getContainerType<std::vector<int> >() {
-    return "vector<int>";
-}
-
-template <>
-std::string getContainerType<std::list<int> >() {
-    return "list<int>";
-}
-
 // Explicit instantiation for all compatible types (without this, we cannot compile the code)
 template class PmergeMe< std::vector<int> >;
 template class PmergeMe< std::list<int> >;
-// template class PmergeMe< std::deque<int> >;
+template class PmergeMe< std::deque<int> >;
 // template class PmergeMe< std::set<int> >;
 // template class PmergeMe< std::map<int, int> >;
 // add more if you need to use more containers

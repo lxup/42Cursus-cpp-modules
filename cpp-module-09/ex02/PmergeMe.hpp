@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 12:56:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/07/01 12:44:39 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/01 18:29:54 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // Containers
 # include <vector>
 # include <list>
-// # include <deque>
+# include <deque>
 // # include <set>
 // # include <map>
 
@@ -47,6 +47,8 @@ class PmergeMe
 
 		// Sort functions
 		std::vector<pair_type>	generatePairs(Container &data);
+		std::vector<int>		generateIndexes(size_t size);
+		std::vector<int>		generateJacobsthal(size_t size);
 	public:
 		PmergeMe(void);
 		PmergeMe(char **av);
