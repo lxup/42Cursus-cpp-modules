@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 12:56:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/27 17:13:22 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/01 12:44:39 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,36 @@
 # include <sstream>
 # include <string>
 # include <limits.h>
+
+// Containers
 # include <vector>
 # include <list>
+// # include <deque>
+// # include <set>
+// # include <map>
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
+
+# define DEFAULT_TIME -1
 
 
 template <typename Container>
 class PmergeMe
 {
+	// Need to declare typedef before using it in the class
+	public:
+		typedef typename Container::value_type		value_type;
+		typedef std::pair <value_type, value_type>	pair_type;
 	private:
 		Container		_data;
 		double			_time;
 
+		// Bool functions
 		static bool	isDigit(std::string const &str);
+
+		// Sort functions
+		std::vector<pair_type>	generatePairs(Container &data);
 	public:
 		PmergeMe(void);
 		PmergeMe(char **av);
@@ -40,12 +55,12 @@ class PmergeMe
 
 		PmergeMe	&operator=(PmergeMe const &src);
 
-		// Template
-		typedef typename Container::value_type value_type;
-		typedef typename Container::size_type size_type;
 		
 		// Sort
 		void	sort(void);
+
+		// Prints
+		void	print(void) const;
 		
 		// Utils
 		static int		ft_stoi(const std::string &input);
