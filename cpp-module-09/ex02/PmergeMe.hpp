@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 12:56:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/07/01 18:29:54 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/02 12:21:27 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,23 @@ class PmergeMe
 	public:
 		typedef typename Container::value_type		value_type;
 		typedef std::pair <value_type, value_type>	pair_type;
+		typedef typename Container::size_type		size_type;
 	private:
 		Container		_data;
 		double			_time;
+		value_type		_odd;
 
 		// Bool functions
 		static bool	isDigit(std::string const &str);
 
 		// Sort functions
 		std::vector<pair_type>	generatePairs(Container &data);
+		void					sortPairs(std::vector<pair_type> &pairs);
+		void					insertionSort(std::vector<pair_type> &pairs);
 		std::vector<int>		generateIndexes(size_t size);
+		unsigned int				jacobsthal(size_t size);
 		std::vector<int>		generateJacobsthal(size_t size);
+		int						binarySearch(std::vector<pair_type> &pairs, int l, int r, int x);
 	public:
 		PmergeMe(void);
 		PmergeMe(char **av);

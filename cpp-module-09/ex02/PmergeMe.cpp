@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 12:57:11 by lquehec           #+#    #+#             */
-/*   Updated: 2024/07/01 18:54:57 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/02 12:23:03 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ std::string getContainerType<std::list<int> >() {
 
 // Constructor (void)
 template <typename Container>
-PmergeMe<Container>::PmergeMe(void) : _data(), _time(DEFAULT_TIME)
+PmergeMe<Container>::PmergeMe(void) : _data(), _time(DEFAULT_TIME), _odd(-1)
 {
 	return ;
 }
 
 // Constructor (char **av)
 template <typename Container>
-PmergeMe<Container>::PmergeMe(char **av) : _data(), _time(DEFAULT_TIME)
+PmergeMe<Container>::PmergeMe(char **av) : _data(), _time(DEFAULT_TIME), _odd(-1)
 {
 	for (int i = 0; av[i]; i++)
 	{
@@ -81,29 +81,25 @@ void	PmergeMe<Container>::sort(void)
 	std::vector<pair_type>	pairs = generatePairs(this->_data);
 	
 	// print pairs
-	// std::cout << "Pairs: ";
-	// for (size_t i = 0; i < pairs.size(); i++)
-	// {
-	// 	std::cout << "(" << pairs[i].first << ", " << pairs[i].second << ") ";
-	// }
-
-	std::vector<int>		indexes = generateIndexes(this->_data.size());
-	
+	std::cout << "Pairs: ";
+	for (size_t i = 0; i < pairs.size(); i++)
+	{
+		std::cout << "(" << pairs[i].first << ", " << pairs[i].second << ") ";
+	}
+	std::cout << std::endl;
 	// print indexes
 	// std::cout << "Indexes: ";
 	// for (size_t i = 0; i < indexes.size(); i++)
 	// 	std::cout << indexes[i] << " ";
 
 	// Case only one odd element
-	if (pairs.size() == 1 && pairs[0].second == -1)
+	if (!pairs.size())
 	{
 		this->_data.clear();
-		this->_data.push_back(pairs[0].first);
+		this->_data.push_back(this->_odd);
 	}
 	else
-	{
-		
-	}
+		insertionSort(pairs);
 	// get final time
 	this->_time = static_cast<double>(clock() - startClock) / CLOCKS_PER_SEC;
 }
@@ -113,7 +109,6 @@ template <typename Container>
 std::vector<typename PmergeMe<Container>::pair_type>	PmergeMe<Container>::generatePairs(Container &data)
 {
 	std::vector<pair_type>	pairs;
-	value_type				odd;
 	
 	// Protect the function
 	if (data.size() < 2)
@@ -121,7 +116,7 @@ std::vector<typename PmergeMe<Container>::pair_type>	PmergeMe<Container>::genera
 	// If the size of the data is odd, we store the last element
 	if (data.size() % 2)
 	{
-		odd = data.back();
+		this->_odd = data.back();
 		data.pop_back();
 	}
 	// We generate the pairs
@@ -133,9 +128,7 @@ std::vector<typename PmergeMe<Container>::pair_type>	PmergeMe<Container>::genera
 			std::swap(pair.first, pair.second);
 		pairs.push_back(pair);
 	}
-	// If the size of the data was odd, we push the last element with second element being -1 (to be sure it will be the last element)
-	if (odd)
-		pairs.push_back(std::make_pair(odd, -1));
+	sortPairs(pairs);
 	return (pairs);
 }
 
@@ -145,7 +138,6 @@ template <>
 std::vector<std::pair<int, int> >	PmergeMe<std::list<int> >::generatePairs(std::list<int> &data)
 {
 	std::vector<std::pair<int, int> >	pairs;
-	value_type							odd;
 	std::list<int>::iterator 			it = data.begin();
 	
 	// Protect the function
@@ -154,7 +146,7 @@ std::vector<std::pair<int, int> >	PmergeMe<std::list<int> >::generatePairs(std::
 	// If the size of the data is odd, we store the last element
 	if (data.size() % 2)
 	{
-		odd = data.back();
+		this->_odd = data.back();
 		data.pop_back();
 	}
 	// We generate the pairs
@@ -166,10 +158,36 @@ std::vector<std::pair<int, int> >	PmergeMe<std::list<int> >::generatePairs(std::
 			std::swap(pair.first, pair.second);
 		pairs.push_back(pair);
 	}
-	// If the size of the data was odd, we push the last element with second element being -1 (to be sure it will be the last element)
-	if (odd)
-		pairs.push_back(std::make_pair(odd, -1));
+	sortPairs(pairs);
 	return (pairs);
+}
+
+// Sort pairs
+template <typename Container>
+void	PmergeMe<Container>::sortPairs(std::vector<pair_type> &pairs)
+{
+	if (pairs.size() < 2)
+		return ;
+	size_type				size = pairs.size();
+	std::vector<pair_type>	left(pairs.begin(), pairs.begin() + size / 2);
+	std::vector<pair_type>	right(pairs.begin() + size / 2, pairs.end());
+	sortPairs(left);
+	sortPairs(right);
+	// Merge sorted pairs
+	size_type	i = 0;
+	size_type	j = 0;
+	size_type	k = 0;
+	while (i < left.size() && j < right.size())
+	{
+		if (left[i].first < right[j].first)
+			pairs[k++] = left[i++];
+		else
+			pairs[k++] = right[j++];
+	}
+	while (i < left.size())
+		pairs[k++] = left[i++];
+	while (j < right.size())
+		pairs[k++] = right[j++];
 }
 
 template <typename Container>
@@ -177,12 +195,36 @@ std::vector<int>	PmergeMe<Container>::generateIndexes(size_t size)
 {
 	// we gonna use the Jacobsthal sequence to generate the indexes
 	std::vector<int>	indexes(size);
-	std::vector<int>	jacobsthal = generateJacobsthal(size);
+	std::vector<int>	jacobsthal = generateJacobsthal(size + 1);
 	
 	// We generate the indexes
-	for (size_t i = 0; i < size; i++)
-		indexes[i] = jacobsthal[i];
+	// for (size_t i = 0; i < size; i++)
+	// 	indexes[i] = jacobsthal(i + 1);
 	return (indexes);
+}
+
+template <typename Container>
+void	PmergeMe<Container>::insertionSort(std::vector<pair_type> &pairs)
+{
+	size_t					pair_size = pairs.size();
+	std::vector<int>		indexes = generateIndexes(pairs.size());
+
+	
+	this->_data.clear();
+	// Add all first elements to the data
+	for (size_t i = 0; i < pair_size; i++)
+		this->_data.push_back(pairs[i].first);
+	// Add all second elements to the data using indexes and binary search
+	for (size_t i = 0; i < pair_size; i++)
+	{
+		if (size_t(indexes[i]) >= pair_size)
+			continue;
+		// int binaryIdx = binarySearch(pairs, 0, pair_size - 1, pairs[indexes[i] - 1].second);
+		// if (binaryIdx != -1)
+		// 	this->_data.push_back(pairs[binaryIdx].second);
+		// else
+		// 	this->_data.push_back(pairs[indexes[i] - 1].second);
+	}
 }
 
 template <typename Container>
@@ -196,6 +238,29 @@ std::vector<int>	PmergeMe<Container>::generateJacobsthal(size_t size)
 		jacobsthal[i] = jacobsthal[i - 1] + 2 * jacobsthal[i - 2];
 	}
     return jacobsthal;
+}
+
+template <typename Container>
+unsigned int	PmergeMe<Container>::jacobsthal(size_t size)
+{
+    if (size == 0) return 0;
+    if (size == 1) return 1;
+    return (PmergeMe::jacobsthal(size - 1) + 2 * PmergeMe::jacobsthal(size - 2));
+}
+
+template <typename Container>
+int		PmergeMe<Container>::binarySearch(std::vector<pair_type> &pairs, int l, int r, int x)
+{
+	if (r >= l)
+	{
+		int		mid = l + (r - l) / 2;
+		if (pairs[mid].first == x)
+			return mid;
+		if (pairs[mid].first > x)
+			return binarySearch(pairs, l, mid - 1, x);
+		return binarySearch(pairs, mid + 1, r, x);
+	}
+	return -1;
 }
 
 // template <>
