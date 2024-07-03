@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 12:57:11 by lquehec           #+#    #+#             */
-/*   Updated: 2024/07/02 12:23:03 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:23:57 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,14 +149,15 @@ std::vector<std::pair<int, int> >	PmergeMe<std::list<int> >::generatePairs(std::
 		this->_odd = data.back();
 		data.pop_back();
 	}
-	// We generate the pairs
-	for (size_t i = 0; i < this->_data.size(); i += 2)
+	// We generate the pairs for list
+	while (it != data.end())
 	{
-		std::advance(it, i);
 		std::pair<int, int> pair = std::make_pair(*it, *(++it));
+
 		if (pair.first > pair.second)
 			std::swap(pair.first, pair.second);
 		pairs.push_back(pair);
+		it++;
 	}
 	sortPairs(pairs);
 	return (pairs);
@@ -168,62 +169,62 @@ void	PmergeMe<Container>::sortPairs(std::vector<pair_type> &pairs)
 {
 	if (pairs.size() < 2)
 		return ;
-	size_type				size = pairs.size();
-	std::vector<pair_type>	left(pairs.begin(), pairs.begin() + size / 2);
-	std::vector<pair_type>	right(pairs.begin() + size / 2, pairs.end());
+	size_type				middle = pairs.size() / 2;
+	std::vector<pair_type>	left(pairs.begin(), pairs.begin() + middle);
+	std::vector<pair_type>	right(pairs.begin() + middle, pairs.end());
 	sortPairs(left);
 	sortPairs(right);
 	// Merge sorted pairs
-	size_type	i = 0;
-	size_type	j = 0;
-	size_type	k = 0;
-	while (i < left.size() && j < right.size())
+	size_type	leftIdx = 0;
+	size_type	rightIdx = 0;
+	size_type	pairsIdx = 0;
+	while (leftIdx < left.size() && rightIdx < right.size())
 	{
-		if (left[i].first < right[j].first)
-			pairs[k++] = left[i++];
+		if (left[leftIdx].first < right[rightIdx].first)
+			pairs[pairsIdx++] = left[leftIdx++];
 		else
-			pairs[k++] = right[j++];
+			pairs[pairsIdx++] = right[rightIdx++];
 	}
-	while (i < left.size())
-		pairs[k++] = left[i++];
-	while (j < right.size())
-		pairs[k++] = right[j++];
+	while (leftIdx < left.size())
+		pairs[pairsIdx++] = left[leftIdx++];
+	while (rightIdx < right.size())
+		pairs[pairsIdx++] = right[rightIdx++];
 }
 
-template <typename Container>
-std::vector<int>	PmergeMe<Container>::generateIndexes(size_t size)
-{
-	// we gonna use the Jacobsthal sequence to generate the indexes
-	std::vector<int>	indexes(size);
-	std::vector<int>	jacobsthal = generateJacobsthal(size + 1);
+// template <typename Container>
+// std::vector<int>	PmergeMe<Container>::generateIndexes(size_t size)
+// {
+// 	// we gonna use the Jacobsthal sequence to generate the indexes
+// 	std::vector<int>	indexes(size);
+// 	std::vector<int>	jacobsthal = generateJacobsthal(size + 1);
 	
-	// We generate the indexes
-	// for (size_t i = 0; i < size; i++)
-	// 	indexes[i] = jacobsthal(i + 1);
-	return (indexes);
-}
+// 	// We generate the indexes
+// 	// for (size_t i = 0; i < size; i++)
+// 	// 	indexes[i] = jacobsthal(i + 1);
+// 	return (indexes);
+// }
 
 template <typename Container>
 void	PmergeMe<Container>::insertionSort(std::vector<pair_type> &pairs)
 {
 	size_t					pair_size = pairs.size();
-	std::vector<int>		indexes = generateIndexes(pairs.size());
+	std::vector<int>		jacobsthal = generateJacobsthal(pair_size + 1);
 
+	// // print indexes
+	// std::cout << "Jacobsthal: ";
+	// for (size_t i = 0; i < jacobsthal.size(); i++)
+	// 	std::cout << jacobsthal[i] << " ";
+	// std::cout << std::endl;
 	
 	this->_data.clear();
 	// Add all first elements to the data
 	for (size_t i = 0; i < pair_size; i++)
 		this->_data.push_back(pairs[i].first);
 	// Add all second elements to the data using indexes and binary search
-	for (size_t i = 0; i < pair_size; i++)
+	for (size_t jacIdx = 0; jacIdx < jacobsthal.size(); jacIdx++)
 	{
-		if (size_t(indexes[i]) >= pair_size)
-			continue;
-		// int binaryIdx = binarySearch(pairs, 0, pair_size - 1, pairs[indexes[i] - 1].second);
-		// if (binaryIdx != -1)
-		// 	this->_data.push_back(pairs[binaryIdx].second);
-		// else
-		// 	this->_data.push_back(pairs[indexes[i] - 1].second);
+		int		idx = binarySearch(pairs, 0, pair_size - 1, jacobsthal[jacIdx]);
+		
 	}
 }
 
@@ -410,7 +411,6 @@ bool	PmergeMe<Container>::isDigit(std::string const &str)
 template <typename Container>
 void	PmergeMe<Container>::print(void) const
 {
-	std::cout << "Data: ";
 	for (typename Container::const_iterator it = _data.begin(); it != _data.end(); it++)
 		std::cout << *it << " ";
 }
@@ -456,7 +456,6 @@ double	PmergeMe<Container>::ft_stod(const std::string &input)
 template <typename Container>
 std::ostream	&operator<<(std::ostream &os, PmergeMe<Container> const &src)
 {
-	os << "Data: ";
 	for (typename Container::const_iterator it = src._data.begin(); it != src._data.end(); it++)
 		os << *it << " ";
 	os << std::endl;
