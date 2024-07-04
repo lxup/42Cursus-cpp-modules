@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:53:44 by lquehec           #+#    #+#             */
-/*   Updated: 2024/07/02 12:15:19 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/04 15:58:21 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int ac, char **av)
 	}
 	try
 	{
-		std::cout << "With vector<int>:\n" << std::endl;
 		PmergeMe<std::vector<int> >	pm(av + 1);
 		// std::cout << "Before sort:\t" << pm << std::endl;
 		std::cout << "Before sort:\t";
@@ -36,7 +35,6 @@ int	main(int ac, char **av)
 		pm.print();
 		std::cout << std::endl;
 
-		std::cout << "With list<int>:\n" << std::endl;
 		PmergeMe<std::list<int> >	pm2(av + 1);
 		// std::cout << "Before sort:\t" << pm2 << std::endl;
 		std::cout << "Before sort:\t";
@@ -48,6 +46,9 @@ int	main(int ac, char **av)
 		std::cout << "After sort:\t";
 		pm2.print();
 		std::cout << std::endl;
+
+		pm.time();
+		pm2.time();
 		
 	}
 	catch(const std::exception& e)

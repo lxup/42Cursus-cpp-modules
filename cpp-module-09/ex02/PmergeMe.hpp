@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 12:56:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/07/02 12:21:27 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/04 15:55:16 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <sstream>
 # include <string>
 # include <limits.h>
+# include <iomanip>
 
 // Containers
 # include <vector>
@@ -52,9 +53,8 @@ class PmergeMe
 		void					sortPairs(std::vector<pair_type> &pairs);
 		void					insertionSort(std::vector<pair_type> &pairs);
 		std::vector<int>		generateIndexes(size_t size);
-		unsigned int				jacobsthal(size_t size);
 		std::vector<int>		generateJacobsthal(size_t size);
-		int						binarySearch(std::vector<pair_type> &pairs, int l, int r, int x);
+		int						binarySearch(int l, int r, int x);
 	public:
 		PmergeMe(void);
 		PmergeMe(char **av);
@@ -69,6 +69,7 @@ class PmergeMe
 
 		// Prints
 		void	print(void) const;
+		void	time(void) const;
 		
 		// Utils
 		static int		ft_stoi(const std::string &input);
