@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 11:58:25 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/18 12:53:36 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/04 20:02:43 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,19 @@ RPN::RPN(std::string input)
 	for (size_t i = 0; i < input.size(); i++)
 	{
 		// _debugPrintStack();
-		if (isdigit(input[i]))
+		if (isdigit(input[i]) || ((input[i] == '-' || input[i] == '+') && isdigit(input[i + 1])))
 		{
 			if (prevIsDigit)
 				throw InvalidExpressionException();
-			this->_stack.push(input[i] - '0');
+			int sign = 1;
+			if (input[i] == '-' || input[i] == '+')
+			{
+				if (input[i] == '-')
+					sign = -sign;
+				i++;
+			}
+			int number = input[i] - '0';
+			this->_stack.push(number * sign);
 			prevIsDigit = true;
 		}
 		else
@@ -44,6 +52,10 @@ RPN::RPN(std::string input)
 					this->_stack.push(b * a);
 				else if (input[i] == '/')
 					this->_stack.push(b / a);
+				else if (input[i] == '^')
+					this->_stack.push(pow(b, a));
+				else if (input[i] == '%')
+					this->_stack.push(fmod(b, a));
 			} else if (iswspace(input[i]))
 				continue;
 			else
@@ -74,7 +86,7 @@ RPN &RPN::operator=(RPN const &src)
 // Conditions
 bool	RPN::_isOperator(char c)
 {
-	return (c == '+' || c == '-' || c == '*' || c == '/');
+	return (c == '+' || c == '-' || c == '*' || c == '/' || c == '^' || c == '%');
 }
 
 // Debug

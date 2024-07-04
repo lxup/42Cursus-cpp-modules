@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:00:28 by lquehec           #+#    #+#             */
-/*   Updated: 2024/07/04 19:25:13 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/04 20:31:01 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ BitcoinExchange::BitcoinExchange(void)
 		std::string date;
 		std::getline(ss, date, ',');
 		ss >> value;
+		if (ss.fail() || !ss.eof())
+			throw std::invalid_argument("invalid value format in data file");
 		// protect date format even if subjet doesn't ask for it
 		try {
 			checkDate(date);
@@ -94,6 +96,21 @@ void BitcoinExchange::checkDate(std::string date)
 	{
 		if (day > (isLeapYear(year) ? 29 : 28))
 			throw InvalidDateException();
+	}
+	// future date
+	time_t now = time(0);
+	tm *ltm = localtime(&now);
+	if (year > 1900 + ltm->tm_year)
+		throw DateNotReachedException();
+	else if (year == 1900 + ltm->tm_year)
+	{
+		if (month > 1 + ltm->tm_mon)
+			throw DateNotReachedException();
+		else if (month == 1 + ltm->tm_mon)
+		{
+			if (day > ltm->tm_mday)
+				throw DateNotReachedException();
+		}
 	}
 }
 
@@ -245,7 +262,7 @@ const char* BitcoinExchange::InvalidValueException::what() const throw()
 
 const char* BitcoinExchange::ValueOutOfRangeException::what() const throw()
 {
-	return ("value out of range");
+	return ("value out of range (0 - 1000)");
 }
 
 const char* BitcoinExchange::NegativeValueException::what() const throw()
@@ -260,4 +277,9 @@ const char* BitcoinExchange::EmptyInputException::what() const throw()
 const char* BitcoinExchange::NoPreviousDateException::what() const throw()
 {
 	return ("no previous date found");
+}
+
+const char* BitcoinExchange::DateNotReachedException::what() const throw()
+{
+	return ("date is in the future");
 }

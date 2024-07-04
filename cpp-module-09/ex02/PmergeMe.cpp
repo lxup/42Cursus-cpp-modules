@@ -6,30 +6,11 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 12:57:11 by lquehec           #+#    #+#             */
-/*   Updated: 2024/07/04 15:59:55 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/04 20:33:36 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-
-// Container type
-template <typename Container>
-std::string getContainerType();
-
-template <>
-std::string getContainerType<std::vector<int> >() {
-    return "vector<int>";
-}
-
-template <>
-std::string getContainerType<std::list<int> >() {
-    return "list<int>";
-}
-
-template <>
-std::string getContainerType<std::deque<int> >() {
-	return "deque<int>";
-}
 
 // Constructor (void)
 template <typename Container>
@@ -72,6 +53,7 @@ PmergeMe<Container>	&PmergeMe<Container>::operator=(PmergeMe const &src)
 	{
 		this->_data = src._data;
 		this->_time = src._time;
+		this->_odd = src._odd;
 	}
 	return (*this);
 }
@@ -94,8 +76,10 @@ void	PmergeMe<Container>::sort(void)
 	}
 	else
 		insertionSort(pairs);
+	// reset odd element
+	this->_odd = -1;
 	// get final time
-	this->_time = static_cast<double>(clock() - startClock) / CLOCKS_PER_SEC;
+	this->_time = static_cast<double>(clock() - startClock) / CLOCKS_PER_SEC * 1000000;
 }
 
 // Sort functions
@@ -166,7 +150,6 @@ void	PmergeMe<Container>::sortPairs(std::vector<pair_type> &pairs)
 	std::vector<pair_type>	right(pairs.begin() + middle, pairs.end());
 	sortPairs(left);
 	sortPairs(right);
-	// Merge sorted pairs
 	size_type	leftIdx = 0;
 	size_type	rightIdx = 0;
 	size_type	pairsIdx = 0;
@@ -182,33 +165,6 @@ void	PmergeMe<Container>::sortPairs(std::vector<pair_type> &pairs)
 	while (rightIdx < right.size())
 		pairs[pairsIdx++] = right[rightIdx++];
 }
-
-// template <typename Container>
-// int_vector PmergeMe<Container>::generate_indexes(size_t size) {
-//     int_vector indexes;
-//     int jacobsthalSequence[size + 1];
-
-//     jacobsthalSequence[0] = 0;
-//     jacobsthalSequence[1] = 1;
-//     int lastJacobsthalNumber = 2;
-
-//     for (size_t i = 2; indexes.size() < size; i++)
-//     {
-//         // Generate the next Jacobsthal number
-//         jacobsthalSequence[i] = jacobsthalSequence[i - 1] + 2 * jacobsthalSequence[i - 2];
-
-//         // Push the jacobsthal number
-//         i != 2 ? indexes.push_back(jacobsthalSequence[i]) : (void)0;
-
-//         // Push back the indexes between the last Jacobsthal number and the current one
-//         for (int j = jacobsthalSequence[i] - 1; j > lastJacobsthalNumber; j--)
-//             indexes.push_back(j);
-
-//         // Update the last Jacobsthal number
-//         lastJacobsthalNumber = jacobsthalSequence[i];
-//     }
-//     return (indexes);
-// }
 
 template <typename Container>
 std::vector<int>	PmergeMe<Container>::generateIndexes(size_t size)
@@ -337,99 +293,6 @@ std::vector<int>	PmergeMe<Container>::generateJacobsthal(size_t size)
     return jacobsthal;
 }
 
-
-
-
-// PmergeMe::PmergeMe(int ac, char **av)
-// {
-// 	if (ac < 2)
-// 		throw std::invalid_argument("please provide at least 1 argument, usage : ./PmergeMe <sequence>");
-// 	checkArgs(ac, av);
-// 	std::cout << "Before: ";
-// 	print(_v);
-// 	// Merge sort with vector
-// 	clock_t		startVectorMerge = clock();
-// 	mergeSort(_v);
-// 	clock_t		endVectorMerge = clock();
-// 	double		timeVectorMerge = static_cast<double>(endVectorMerge - startVectorMerge) / CLOCKS_PER_SEC * 1000;
-
-// 	// Merge sort with list
-// 	clock_t		startListMerge = clock();
-// 	mergeSort(_l);
-// 	clock_t		endListMerge = clock();
-// 	double		timeListMerge = static_cast<double>(endListMerge - startListMerge) / CLOCKS_PER_SEC * 1000;
-
-// 	std::cout << "After: ";
-// 	print(_v);
-// 	std::cout << "Time for sorting as vector: " << timeVectorMerge << "us" << std::endl;
-// 	std::cout << "Time for sorting as list: " << timeListMerge << "us" << std::endl;
-// 	return ;
-// }
-
-// PmergeMe::PmergeMe(PmergeMe const &src)
-// {
-// 	*this = src;
-// 	return ;
-// }
-
-// PmergeMe::~PmergeMe(void)
-// {
-// 	return ;
-// }
-
-// PmergeMe	&PmergeMe::operator=(PmergeMe const &src)
-// {
-// 	if (this != &src)
-// 	{
-// 		this->_v = src._v;
-// 		this->_l = src._l;
-// 	}
-// 	return (*this);
-// }
-
-
-// /* ==================== MERGE SORT ==================== */
-// void	PmergeMe::mergeSort(std::vector<int> &v)
-// {
-// 	(void)v;
-// }
-
-// void	PmergeMe::mergeSort(std::list<int> &l)
-// {
-// 	(void)l;
-// }
-// /* ==================================================== */
-
-// void	PmergeMe::checkArgs(int ac, char **av)
-// {
-// 	for (int i = 1; i < ac; i++)
-// 	{
-// 		if (!isDigit(av[i]))
-// 			throw std::invalid_argument("please provide only numbers -> " + std::string(av[i]));
-// 		_v.push_back(PmergeMe::ft_stoi(av[i]));
-// 		_l.push_back(PmergeMe::ft_stoi(av[i]));
-// 	}
-// }
-
-// bool	PmergeMe::isDigit(std::string const &str)
-// {
-// 	for (size_t i = 0; i < str.size(); i++)
-// 	{
-// 		if (!isdigit(str[i]))
-// 			return (false);
-// 	}
-// 	return (true);
-// }
-
-// // Prints
-// template <typename T>
-// void	PmergeMe::print(T const &container)
-// {
-// 	for (typename T::const_iterator it = container.begin(); it != container.end(); it++)
-// 		std::cout << *it << " ";
-// 	std::cout << std::endl;
-// }
-
 // Utils
 template <typename Container>
 bool	PmergeMe<Container>::isDigit(std::string const &str)
@@ -477,9 +340,53 @@ void	PmergeMe<Container>::print(void) const
 template <typename Container>
 void	PmergeMe<Container>::time(void) const
 {
-	std::cout << "Time to process a range of " << this->_data.size()
-		<< " element" << (this->_data.size() > 1 ? "s" : "") << " with std::" << getContainerType<Container>()
-		<< " : " << std::fixed << std::setprecision(5) << this->_time << "us" << std::endl;
+	if (this->_time == DEFAULT_TIME)
+	{
+		if (this->_data.size() < 2)
+			std::cout << "You don't have enough numbers (minimum 2 numbers)" << std::endl;
+		else
+			std::cout << "Please sort the data before printing the time" << std::endl;
+	}
+	else
+	{
+		std::cout << "Time to process a range of " << this->_data.size()
+			<< " element" << (this->_data.size() > 1 ? "s" : "") << " with std::" << this->getType() << "\t➡️\t";
+		if (this->_time > 60000000) // if time can be displayed in minutes
+			std::cout << std::fixed << std::setprecision(2) << int(this->_time / 60000000) << "." << int(this->_time / 1000000) % 60 << "m" << std::endl;
+		else if (this->_time > 100000) // if time can be displayed in seconds
+			std::cout << std::fixed << std::setprecision(5) << this->_time / 1000000 << "s" << std::endl;
+		else if (this->_time > 100) // if time can be displayed in milliseconds
+			std::cout << std::fixed << std::setprecision(5) << this->_time / 1000 << "ms" << std::endl;
+		else
+			std::cout << std::fixed << std::setprecision(5) << this->_time << "us" << std::endl;
+	}
+}
+
+
+
+// Types
+template <typename Container>
+std::string		PmergeMe<Container>::getType(void) const
+{
+	return "Unsupported";
+}
+
+template <>
+std::string		PmergeMe<std::vector<int> >::getType(void) const
+{
+	return "vector<int>";
+}
+
+template <>
+std::string		PmergeMe<std::list<int> >::getType(void) const
+{
+	return "list<int>";
+}
+
+template <>
+std::string		PmergeMe<std::deque<int> >::getType(void) const
+{
+	return "deque<int>";
 }
 
 // Utils
@@ -520,14 +427,14 @@ double	PmergeMe<Container>::ft_stod(const std::string &input)
 }
 
 // Surcharged operators
-template <typename Container>
-std::ostream	&operator<<(std::ostream &os, PmergeMe<Container> const &src)
-{
-	for (typename Container::const_iterator it = src._data.begin(); it != src._data.end(); it++)
-		os << *it << " ";
-	os << std::endl;
-	return (os);
-}
+// template <typename Container>
+// std::ostream	&operator<<(std::ostream &os, PmergeMe<Container> const &src)
+// {
+// 	for (typename Container::const_iterator it = src._data.begin(); it != src._data.end(); it++)
+// 		os << *it << " ";
+// 	os << std::endl;
+// 	return (os);
+// }
 
 // Explicit instantiation for all compatible types (without this, we cannot compile the code)
 template class PmergeMe< std::vector<int> >;
@@ -535,4 +442,4 @@ template class PmergeMe< std::list<int> >;
 template class PmergeMe< std::deque<int> >;
 // template class PmergeMe< std::set<int> >;
 // template class PmergeMe< std::map<int, int> >;
-// add more if you need to use more containers
+// ...

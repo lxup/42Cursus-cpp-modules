@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:00:13 by lquehec           #+#    #+#             */
-/*   Updated: 2024/07/04 19:21:47 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/04 19:54:18 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,11 @@ class BitcoinExchange
 				virtual const char* what() const throw();
 		};
 		class NoPreviousDateException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
+		class DateNotReachedException : public std::exception
 		{
 			public:
 				virtual const char* what() const throw();
