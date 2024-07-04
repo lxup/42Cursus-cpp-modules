@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:00:13 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/18 11:55:10 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/04 19:21:47 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,6 @@ class BitcoinExchange
 			public:
 				virtual const char* what() const throw();
 		};
-		class DataHeaderFormatException : public std::exception
-		{
-			public:
-				virtual const char* what() const throw();
-		};
-		class EmptyDataException : public std::exception
-		{
-			public:
-				virtual const char* what() const throw();
-		};
 		class InvalidDateException : public std::exception
 		{
 			public:
@@ -92,6 +82,16 @@ class BitcoinExchange
 				virtual const char* what() const throw();
 		};
 		class NegativeValueException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
+		class EmptyInputException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
+		class NoPreviousDateException : public std::exception
 		{
 			public:
 				virtual const char* what() const throw();

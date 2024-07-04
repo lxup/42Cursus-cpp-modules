@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:00:28 by lquehec           #+#    #+#             */
-/*   Updated: 2024/06/18 11:56:59 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/04 19:25:13 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ BitcoinExchange::BitcoinExchange(void)
 	if (!file.is_open())
 		throw NoDataException();
 	if (file.peek() == std::ifstream::traits_type::eof())
-		throw EmptyDataException();
+		throw std::invalid_argument("empty data found in file");
 	std::getline(file, line);
 	std::transform(line.begin(), line.end(), line.begin(), ::tolower);
-	if (line != "date,exchange_rate")
-		throw DataHeaderFormatException();
+	if (line.compare("date,exchange_rate") != 0)
+		throw std::invalid_argument("header format of data file is not correct");
 	while (std::getline(file, line))
 	{
 		double value;
@@ -32,6 +32,12 @@ BitcoinExchange::BitcoinExchange(void)
 		std::string date;
 		std::getline(ss, date, ',');
 		ss >> value;
+		// protect date format even if subjet doesn't ask for it
+		try {
+			checkDate(date);
+		} catch (const std::exception &e) {
+			throw std::invalid_argument("invalid date format in data file");
+		}
 		this->_data[date] = value;
 	}
 	if (this->_data.empty())
@@ -101,7 +107,7 @@ void BitcoinExchange::exchange(const char *filename)
 	if (!file.is_open())
 		throw FileException();
 	if (file.peek() == std::ifstream::traits_type::eof())
-		throw FileException();
+		throw EmptyInputException();
 
 	// Check header
 	std::getline(file, line);
@@ -109,6 +115,7 @@ void BitcoinExchange::exchange(const char *filename)
 	if (line != "date | value")
 		throw FileFormatException();
 	
+	int lineCount = 0;
 	// Read data
 	while (std::getline(file, line))
 	{
@@ -121,6 +128,8 @@ void BitcoinExchange::exchange(const char *filename)
 		value.erase(std::remove(value.begin(), value.end(), ' '), value.end());
 		try
 		{
+			if (date.empty())
+				throw std::invalid_argument("empty field");
 			checkDate(date);
 			double valueConverted = checkValue(value);
 			printResult(date, valueConverted);
@@ -129,7 +138,10 @@ void BitcoinExchange::exchange(const char *filename)
 		{
 			std::cerr << "Error: " << e.what() << std::endl;
 		}
+		lineCount++;
 	}
+	if (lineCount == 0)
+		throw EmptyInputException();
 	file.close();
 }
 
@@ -154,7 +166,7 @@ void BitcoinExchange::printResult(std::string date, double value)
 	{
 		std::map<std::string, double>::iterator it = this->_data.upper_bound(date);
 		if (it == this->_data.begin())
-			throw InvalidDateException();
+			throw NoPreviousDateException();
 		else
 		{
 			--it;
@@ -221,16 +233,6 @@ const char* BitcoinExchange::NoDataException::what() const throw()
 	return ("data file isn't found");
 }
 
-const char* BitcoinExchange::DataHeaderFormatException::what() const throw()
-{
-	return ("header format of data file is not correct");
-}
-
-const char* BitcoinExchange::EmptyDataException::what() const throw()
-{
-	return ("empty data found in file");
-}
-
 const char* BitcoinExchange::InvalidDateException::what() const throw()
 {
 	return ("invalid date format");
@@ -249,4 +251,13 @@ const char* BitcoinExchange::ValueOutOfRangeException::what() const throw()
 const char* BitcoinExchange::NegativeValueException::what() const throw()
 {
 	return ("not a positive number");
+}
+
+const char* BitcoinExchange::EmptyInputException::what() const throw()
+{
+	return ("empty input file");
+}
+const char* BitcoinExchange::NoPreviousDateException::what() const throw()
+{
+	return ("no previous date found");
 }
