@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 12:57:11 by lquehec           #+#    #+#             */
-/*   Updated: 2024/07/04 20:33:36 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/07/05 12:30:54 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -350,12 +350,12 @@ void	PmergeMe<Container>::time(void) const
 	else
 	{
 		std::cout << "Time to process a range of " << this->_data.size()
-			<< " element" << (this->_data.size() > 1 ? "s" : "") << " with std::" << this->getType() << "\t➡️\t";
+			<< " element" << (this->_data.size() > 1 ? "s" : "") << " with std::" << this->getType() << "\t->\t";
 		if (this->_time > 60000000) // if time can be displayed in minutes
 			std::cout << std::fixed << std::setprecision(2) << int(this->_time / 60000000) << "." << int(this->_time / 1000000) % 60 << "m" << std::endl;
-		else if (this->_time > 100000) // if time can be displayed in seconds
+		else if (this->_time > 1000000) // if time can be displayed in seconds
 			std::cout << std::fixed << std::setprecision(5) << this->_time / 1000000 << "s" << std::endl;
-		else if (this->_time > 100) // if time can be displayed in milliseconds
+		else if (this->_time > 1000) // if time can be displayed in milliseconds
 			std::cout << std::fixed << std::setprecision(5) << this->_time / 1000 << "ms" << std::endl;
 		else
 			std::cout << std::fixed << std::setprecision(5) << this->_time << "us" << std::endl;
