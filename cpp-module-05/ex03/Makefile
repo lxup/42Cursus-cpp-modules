@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 15:29:09 by lquehec           #+#    #+#              #
-#    Updated: 2024/06/10 19:22:03 by lquehec          ###   ########.fr        #
+#    Updated: 2024/07/25 11:59:35 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ NAME			=	bureaucrat
 
 CXX				=	c++
 RM				=	rm -rf
-CPPFLAGS			+=	-Wall -Wextra -Werror -std=c++98
+CXXFLAGS			+=	-Wall -Wextra -Werror -std=c++98
 
 # **************************************************************************** #
 #                                    PATHS                                     #
@@ -88,13 +88,13 @@ DEPS			=	$(OBJS:.o=.d)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(HEADERS)
-	@$(CXX) $(CPPFLAGS) $(OBJS) -o $(NAME)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	@echo "\n${GREEN}> $(NAME) was successfuly compiled 🎉${END}"
 
 $(OBJ_PATH)/%.o: %.cpp $(HEADERS)
 			@mkdir -p $(dir $@)
 			@printf "${BLUE}>Generating $(NAME) objects... %-33.33s\r${END}" $@
-			@$(CXX) $(CPPFLAGS) -c $< -o $@
+			@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJ_PATH)
